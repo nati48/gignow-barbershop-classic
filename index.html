@@ -1,18 +1,17 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-i18n="page_title">THE CLASSIC | ברברשופ מודרני</title>
+    <title data-i18n="page_title">THE CLASSIC BARBERSHOP | ברברשופ מודרני</title>
 
     <!-- PWA / Mobile App Meta Tags -->
-    <meta name="theme-color" content="#1A1A1A">
+    <meta name="theme-color" content="#FFFFFF">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="GigNow דוגמה">
-    <link rel="apple-touch-icon"
-        href="images/logo.jpg">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
@@ -20,17 +19,16 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Rubik for modern Hebrew -->
+    <!-- Google Fonts: Inter for modern clean look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External CSS -->
-    <link rel="stylesheet" href="css/styles.css?v=1778438682">
+    <link rel="stylesheet" href="css/styles.css?v=2">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
@@ -42,438 +40,396 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
-    <!-- Configuration for Tailwind -->
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Rubik', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        gold: { // teal theme
-                            DEFAULT: '#14B8A6',
-                            hover: '#0D9488',
+                        indigo: {
+                            DEFAULT: '#4F46E5',
+                            hover: '#4338CA',
+                            light: '#EEF2FF',
+                            50: '#EEF2FF',
+                            100: '#E0E7FF',
+                            500: '#4F46E5',
+                            600: '#4338CA',
+                            700: '#3730A3',
                         },
-                        dark: {
-                            100: '#1A1A1A',
-                            200: '#111111',
-                            300: '#0A0A0A',
+                        orange: {
+                            DEFAULT: '#F97316',
+                            hover: '#EA580C',
+                            light: '#FFF7ED',
+                            50: '#FFF7ED',
+                            500: '#F97316',
+                            600: '#EA580C',
+                        },
+                        surface: {
+                            DEFAULT: '#FFFFFF',
+                            alt: '#F3F4F6',
+                            muted: '#F9FAFB',
                         }
                     }
                 }
             }
         }
     </script>
-
-
 </head>
 
-<body class="bg-dark-300 text-gray-200 font-sans antialiased selection:bg-gold selection:text-white relative" id="home">
+<body class="bg-white text-gray-900 font-sans antialiased">
 
-    <!-- DEMO BANNER -->
-    <div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#C5A059;color:#1a1a1a;text-align:center;padding:3px 8px;font-weight:700;font-size:11px;letter-spacing:1px;font-family:Rubik,sans-serif;line-height:1.4;">✂️ אתר דוגמא — <a href="https://gignow.co.il" style="color:#1a1a1a;text-decoration:underline;font-weight:800">הפוך אותו לשלך, מותאם אישית</a> ✂️</div>
-    <div style="height:18px"></div>
+    <!-- ═══ Demo Banner ═══ -->
+    <div class="demo-banner bg-indigo text-white text-center py-2 text-sm font-medium relative z-50">
+        <a href="https://gignow.co.il" target="_blank" class="hover:underline">
+            ✂️ אתר דוגמא — הפוך אותו לשלך ✂️
+        </a>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-40 transition-all duration-300 bg-dark-300/90 backdrop-blur-md border-b border-white/5"
-        id="navbar">
-        <div class="w-full px-4 sm:px-6 lg:px-10">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="flex items-center gap-3">
-                        <img src="images/logo.jpg" alt="THE CLASSIC" class="h-14 w-14 rounded-full object-cover border border-gold/30 shadow-lg shadow-teal-500/10">
-                        <span class="text-xl font-bold text-white tracking-wide hidden sm:block">THE CLASSIC</span>
-                    </a>
-                </div>
+    <!-- ═══ Sticky Minimal Nav ═══ -->
+    <nav id="navbar" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <span class="text-xl font-black tracking-tight text-gray-900">THE CLASSIC</span>
+            </a>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="text-sm font-medium text-gray-300 hover:text-gold transition-colors" data-i18n="nav_home">בית</a>
-                    <a href="#about"
-                        class="text-sm font-medium text-gray-300 hover:text-gold transition-colors" data-i18n="nav_about">אודות</a>
-                    <a href="#services"
-                        class="text-sm font-medium text-gray-300 hover:text-gold transition-colors" data-i18n="nav_services">שירותים</a>
-                    <a href="#gallery"
-                        class="text-sm font-medium text-gray-300 hover:text-gold transition-colors" data-i18n="nav_gallery">גלריה</a>
-                    <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-gold transition-colors" data-i18n="nav_contact">צור
-                        קשר</a>
-
-                    <button onclick="openMyAppointments()"
-                        class="text-sm font-medium text-gray-300 hover:text-gold transition-colors">
-                        <i class="fa-solid fa-calendar-check ml-1"></i> התורים שלי
-                    </button>
-
-                    <button onclick="openDashboard()"
-                        class="text-sm font-medium text-gold hover:text-white transition-colors border border-gold/30 px-3 py-1 rounded-md bg-gold/10">
-                        <i class="fa-solid fa-lock ml-1"></i> <span data-i18n="nav_dashboard">יומן ספרים</span>
-                    </button>
-
-                    <button onclick="openBookingModal()"
-                        class="bg-gold hover:bg-gold-hover text-white px-6 py-2.5 rounded-sm text-sm font-semibold transition-all shadow-lg shadow-teal-500/20 flex items-center gap-2">
-                        <span data-i18n="nav_book_now">הזמן תור עכשיו</span>
-                        <i class="fa-regular fa-calendar-check"></i>
-                    </button>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
+            <!-- Desktop Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="openMyAppointments()" class="text-sm text-gray-500 hover:text-indigo transition-colors font-medium">
+                    התורים שלי
+                </button>
+                <button onclick="openDashboard()" class="text-sm text-gray-500 hover:text-indigo transition-colors font-medium">
+                    כניסת ספרים
+                </button>
+                <button onclick="openBookingModal()"
+                    class="bg-indigo hover:bg-indigo-hover text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-indigo/25">
+                    הזמן תור
+                </button>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-700">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-dark-200 border-t border-white/5 absolute w-full shadow-2xl">
-            <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#home"
-                    class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5" data-i18n="nav_home">בית</a>
-                <a href="#about"
-                    class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5" data-i18n="nav_about">אודות</a>
-                <a href="#services"
-                    class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5" data-i18n="nav_services">שירותים</a>
-                <a href="#gallery"
-                    class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5" data-i18n="nav_gallery">גלריה</a>
-                <a href="#contact"
-                    class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5" data-i18n="nav_contact">צור
-                    קשר</a>
-
-                <button onclick="openMyAppointments(); document.getElementById('mobile-menu').classList.add('hidden');"
-                    class="w-full text-right block px-3 py-3 text-base font-medium text-gray-300 hover:text-gold border-b border-white/5">
-                    <i class="fa-solid fa-calendar-check ml-1"></i> התורים שלי
-                </button>
-
-                <button onclick="openDashboard(); document.getElementById('mobile-menu').classList.add('hidden'); document.querySelectorAll('body > *').forEach(el => el.style.filter = '');"
-                    class="w-full text-right block px-3 py-3 text-base font-medium text-gold border-b border-white/5">
-                    <i class="fa-solid fa-lock ml-1"></i> <span data-i18n="nav_dashboard_mobile">כניסת ספרים (יומן)</span>
-                </button>
-
-                <div class="pt-4">
-                    <button
-                        onclick="openBookingModal(); document.getElementById('mobile-menu').classList.add('hidden');"
-                        class="w-full flex justify-center items-center gap-2 bg-gold hover:bg-gold-hover text-white px-6 py-3 rounded-sm text-base font-semibold transition-all">
-                        <span data-i18n="nav_book_short">הזמן תור</span>
-                        <i class="fa-regular fa-calendar-check"></i>
-                    </button>
-                </div>
-            </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-3">
+            <button onclick="openBookingModal()" class="w-full bg-indigo text-white py-3 rounded-xl font-bold text-sm">הזמן תור</button>
+            <button onclick="openMyAppointments()" class="w-full text-gray-600 py-2 text-sm font-medium">התורים שלי</button>
+            <button onclick="openDashboard()" class="w-full text-gray-600 py-2 text-sm font-medium">כניסת ספרים</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative h-screen min-h-[600px] flex items-center justify-center">
-        <!-- Background Image (Uploaded: Barber cutting hair) -->
-        <div class="absolute inset-0 z-0">
-            <img src="images/hero-bg.jpg"
-                alt="THE CLASSIC" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 hero-overlay"></div>
-        </div>
-
-        <!-- Content -->
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <div id="open-status" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5"></div>
-            <h3 class="text-gold font-medium tracking-widest uppercase mb-4 text-sm md:text-base" data-i18n="hero_kicker">הסטנדרט החדש של גברים
-            </h3>
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                <span data-i18n="hero_title_1">חוויית הטיפוח</span> <br /> <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-200" data-i18n="hero_title_2">המושלמת לגבר</span>
-            </h1>
-            <div class="mb-10 max-w-2xl mx-auto">
-                <div class="inline-flex flex-col sm:flex-row items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-4">
-                    <div class="flex items-center gap-2 text-white">
-                        <i class="fa-solid fa-location-dot text-gold text-xl"></i>
-                        <span class="text-base md:text-lg font-semibold">דיזנגוף 120, תל אביב</span>
+    <!-- ═══ SECTION 1: Split Hero ═══ -->
+    <section class="relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh]">
+                <!-- Right: Text Content -->
+                <div class="flex flex-col justify-center px-8 lg:px-16 py-16 lg:py-24 order-2 lg:order-1">
+                    <div id="open-status" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 bg-green-50 border border-green-200 text-green-600 w-fit">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> בודק...
                     </div>
+                    <h1 class="text-5xl lg:text-7xl font-black leading-tight mb-6 tracking-tight">
+                        <span class="text-gray-900">ברברשופ</span><br>
+                        <span class="text-indigo">מודרני.</span>
+                    </h1>
+                    <p class="text-lg text-gray-500 leading-relaxed mb-10 max-w-md">
+                        חוויית טיפוח פרימיום לגבר המודרני. דיוק, מקצועיות ותשומת לב לכל פרט.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openBookingModal()"
+                            class="bg-orange hover:bg-orange-hover text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl shadow-orange/30 hover:shadow-2xl hover:shadow-orange/40 hover:-translate-y-0.5">
+                            <i class="fa-solid fa-calendar-check ml-2"></i>
+                            הזמן תור עכשיו
+                        </button>
+                        <a href="#services"
+                            class="text-gray-500 hover:text-indigo px-8 py-4 rounded-full text-lg font-medium transition-colors text-center border border-gray-200 hover:border-indigo/30">
+                            צפה בשירותים
+                        </a>
+                    </div>
+                </div>
+                <!-- Left: Hero Image -->
+                <div class="relative order-1 lg:order-2 min-h-[50vh] lg:min-h-0">
+                    <img src="images/hero.jpg" alt="THE CLASSIC BARBERSHOP"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent lg:bg-gradient-to-r lg:from-white/30 lg:to-transparent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 2: Horizontal Services Scroll ═══ -->
+    <section id="services" class="py-20 bg-surface-alt">
+        <div class="max-w-7xl mx-auto px-8 mb-10">
+            <div class="flex items-end justify-between">
+                <div>
+                    <span class="text-indigo font-bold text-sm tracking-wider uppercase">השירותים שלנו</span>
+                    <h2 class="text-4xl font-black mt-2">מה אנחנו מציעים</h2>
+                </div>
+                <div class="hidden sm:flex gap-2">
+                    <button onclick="scrollServices(-1)" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-indigo hover:text-indigo transition-colors">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <button onclick="scrollServices(1)" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-indigo hover:text-indigo transition-colors">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="services-scroll" class="flex gap-5 overflow-x-auto scroll-smooth px-8 pb-4 snap-x snap-mandatory hide-scrollbar" style="scroll-padding-inline-start: 2rem;">
+            <!-- Service Card -->
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-indigo-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-scissors text-indigo text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">תספורת גבר</h3>
+                <p class="text-gray-400 text-sm mb-4">תספורת מקצועית עם גימור מושלם</p>
+                <span class="text-2xl font-black text-indigo">₪60</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-orange-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-child text-orange text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">תספורת ילד</h3>
+                <p class="text-gray-400 text-sm mb-4">תספורת מותאמת לילדים עד גיל 12</p>
+                <span class="text-2xl font-black text-orange">₪50</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-indigo-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-face-smile-beam text-indigo text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">עיצוב זקן</h3>
+                <p class="text-gray-400 text-sm mb-4">עיצוב וגילוח מקצועי עם סכין</p>
+                <span class="text-2xl font-black text-indigo">₪40</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-orange-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-orange text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">תספורת + זקן</h3>
+                <p class="text-gray-400 text-sm mb-4">חבילת הטיפוח המלאה</p>
+                <span class="text-2xl font-black text-orange">₪90</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-indigo-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-head-side-virus text-indigo text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">גילוח ראש</h3>
+                <p class="text-gray-400 text-sm mb-4">גילוח מלא עם מכונה או סכין</p>
+                <span class="text-2xl font-black text-indigo">₪50</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-orange-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-palette text-orange text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">צבע / גוונים</h3>
+                <p class="text-gray-400 text-sm mb-4">צביעה וגוונים מקצועיים לגבר</p>
+                <span class="text-2xl font-black text-orange">₪120+</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-indigo-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-spray-can-sparkles text-indigo text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">טיפול פנים</h3>
+                <p class="text-gray-400 text-sm mb-4">טיפול פנים מרגיע ומחדש</p>
+                <span class="text-2xl font-black text-indigo">₪80</span>
+            </div>
+            <div class="service-card snap-start flex-shrink-0 w-64 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-indigo/20 transition-all">
+                <div class="w-14 h-14 bg-orange-light rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-gem text-orange text-xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-1">חבילת VIP</h3>
+                <p class="text-gray-400 text-sm mb-4">תספורת + זקן + טיפול פנים</p>
+                <span class="text-2xl font-black text-orange">₪150</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 3: About — Editorial Quote ═══ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-8 text-center">
+            <div class="relative">
+                <span class="absolute -top-12 right-0 text-[120px] leading-none text-gray-100 font-black select-none">"</span>
+                <blockquote class="text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed relative z-10">
+                    עם אהבה למקצוע ותשומת לב לפרטים הקטנים ביותר, הקמתי את המספרה כדי להעניק לגברים חוויית טיפוח שלא מסתכמת רק בתספורת. מקצועיות, יחס אישי ואווירה יוקרתית — הם הבסיס לכל לקוח שמתיישב אצלנו בכיסא.
+                </blockquote>
+                <div class="mt-8 flex items-center justify-center gap-4">
+                    <div class="w-12 h-px bg-indigo"></div>
+                    <span class="text-indigo font-bold text-lg">THE CLASSIC BARBERSHOP</span>
+                    <div class="w-12 h-px bg-indigo"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 4: Team — Full Bleed ═══ -->
+    <section class="py-20 bg-surface-alt">
+        <div class="max-w-7xl mx-auto px-8 mb-12">
+            <span class="text-indigo font-bold text-sm tracking-wider uppercase">הצוות שלנו</span>
+            <h2 class="text-4xl font-black mt-2">הספרים</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+            <div class="relative group overflow-hidden aspect-[3/4] md:aspect-auto md:h-[500px]">
+                <img src="images/barber1.jpg" alt="טל אזולאי" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 right-0 left-0 p-8">
+                    <h3 class="text-white text-2xl font-bold">טל אזולאי</h3>
+                    <p class="text-white/70 text-sm mt-1">ספר בכיר | 8 שנות ניסיון</p>
+                </div>
+            </div>
+            <div class="relative group overflow-hidden aspect-[3/4] md:aspect-auto md:h-[500px]">
+                <img src="images/barber2.jpg" alt="שחר בן דוד" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 right-0 left-0 p-8">
+                    <h3 class="text-white text-2xl font-bold">שחר בן דוד</h3>
+                    <p class="text-white/70 text-sm mt-1">מומחה לעיצוב זקן | 6 שנות ניסיון</p>
+                </div>
+            </div>
+            <div class="relative group overflow-hidden aspect-[3/4] md:aspect-auto md:h-[500px]">
+                <img src="images/barber3.jpg" alt="עומר חדד" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 right-0 left-0 p-8">
+                    <h3 class="text-white text-2xl font-bold">עומר חדד</h3>
+                    <p class="text-white/70 text-sm mt-1">סטייליסט ראשי | 5 שנות ניסיון</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 5: Location ═══ -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Map -->
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-[400px]">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.0!2d34.7735!3d32.0747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sDizengoff+120+Tel+Aviv!5e0!3m2!1sen!2sil!4v1234567890"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <!-- Info -->
+                <div>
+                    <span class="text-indigo font-bold text-sm tracking-wider uppercase">בואו לבקר</span>
+                    <h2 class="text-4xl font-black mt-2 mb-8">מיקום ושעות</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-indigo-light rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-indigo text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">כתובת</h4>
+                                <p class="text-gray-500 mt-1">דיזנגוף 120, תל אביב</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-light rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone text-orange text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">טלפון</h4>
+                                <a href="tel:03-1234567" class="text-gray-500 mt-1 block hover:text-indigo transition-colors" dir="ltr">03-1234567</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-indigo-light rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-clock text-indigo text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">שעות פעילות</h4>
+                                <div class="text-gray-500 mt-1 text-sm space-y-1">
+                                    <p>ראשון: 09:00 - 20:00</p>
+                                    <p>שלישי - חמישי: 09:00 - 20:00</p>
+                                    <p>שישי: 08:00 - 15:00</p>
+                                    <p class="text-red-400">שני, שבת: סגור</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SECTION 6: Reviews Masonry ═══ -->
+    <section class="py-20 bg-surface-alt">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-14">
+                <span class="text-indigo font-bold text-sm tracking-wider uppercase">מה אומרים עלינו</span>
+                <h2 class="text-4xl font-black mt-2">ביקורות לקוחות</h2>
+            </div>
+
+            <div class="reviews-masonry">
+                <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-1 mb-3 text-orange">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4">שירות ברמה הגבוהה ביותר. טל הוא ספר מדהים עם ידיים של זהב. מגיע לפה כבר שנתיים ולא מתכוון לעבור למקום אחר.</p>
                     <div class="flex items-center gap-3">
-                        <a href="https://maps.google.com/?q=%D7%94%D7%A8%D7%A6%D7%9C+42+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91" target="_blank" rel="noopener"
-                            class="flex items-center gap-1.5 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
-                            <i class="fa-brands fa-google"></i> Maps
-                        </a>
-                        <a href="https://waze.com/ul?q=%D7%94%D7%A8%D7%A6%D7%9C+42+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91&navigate=yes" target="_blank" rel="noopener"
-                            class="flex items-center gap-1.5 bg-gold/80 hover:bg-gold text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
-                            <i class="fa-brands fa-waze"></i> Waze
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="openBookingModal()"
-                    class="bg-gold hover:bg-white hover:text-dark-300 text-white px-8 py-4 rounded-sm text-lg font-semibold transition-all duration-300 shadow-xl shadow-teal-500/20" data-i18n="hero_cta_book">
-                    הזמן תור עכשיו
-                </button>
-                <a href="#services"
-                    class="bg-transparent border border-white/20 hover:border-white hover:bg-white/5 text-white px-8 py-4 rounded-sm text-lg font-medium transition-all duration-300" data-i18n="hero_cta_services">
-                    מחירון ושירותים
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features / About Section -->
-    <section id="about" class="py-20 bg-dark-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- About Ron Profile -->
-            <div
-                class="flex flex-col md:flex-row items-center gap-10 mb-20 bg-dark-100 p-8 rounded-2xl border border-white/5">
-                <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
-                    <!-- Uploaded: Ron Amar Profile -->
-                    <img src="images/ron-profile.jpg"
-                        alt="THE CLASSIC"
-                        class="w-full h-full object-cover rounded-full border-4 border-gold shadow-2xl shadow-teal-500/10">
-                </div>
-                <div class="text-center md:text-right">
-                    <h2 class="text-3xl font-bold text-white mb-2" data-i18n="about_ron_name">טל אזולאי</h2>
-                    <h3 class="text-gold font-medium mb-4" data-i18n="about_ron_role">מייסד וספר ראשי</h3>
-                    <p class="text-gray-400 font-light leading-relaxed max-w-2xl text-lg" data-i18n="about_ron_bio">
-                        עם אהבה למקצוע ותשומת לב לפרטים הקטנים ביותר, הקמתי את המספרה כדי להעניק לגברים חוויית טיפוח שלא
-                        מסתכמת רק בתספורת. מקצועיות, יחס אישי ואווירה יוקרתית הם הבסיס לכל לקוח שמתיישב אצלי בכיסא.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Feature 1 -->
-                <div
-                    class="text-center p-6 rounded-lg bg-dark-100 border border-white/5 hover:border-gold/30 transition-colors duration-300">
-                    <div
-                        class="w-16 h-16 mx-auto bg-dark-300 rounded-full flex items-center justify-center mb-6 border border-white/10 text-gold text-2xl">
-                        <i class="fa-solid fa-scissors"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3" data-i18n="feature_1_title">דיוק חסר פשרות</h3>
-                    <p class="text-gray-400 font-light leading-relaxed" data-i18n="feature_1_desc">
-                        תספורות קלאסיות ומודרניות בהתאמה אישית למבנה הפנים ולסטייל הייחודי שלך.
-                    </p>
-                </div>
-                <!-- Feature 2 -->
-                <div
-                    class="text-center p-6 rounded-lg bg-dark-100 border border-white/5 hover:border-gold/30 transition-colors duration-300">
-                    <div
-                        class="w-16 h-16 mx-auto bg-dark-300 rounded-full flex items-center justify-center mb-6 border border-white/10 text-gold text-2xl">
-                        <i class="fa-solid fa-martini-glass"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3" data-i18n="feature_2_title">אווירת פרימיום</h3>
-                    <p class="text-gray-400 font-light leading-relaxed" data-i18n="feature_2_desc">
-                        עיצוב מוקפד, וויסקי משובח, מוזיקה טובה, ואווירה שמאפשרת לך להתנתק לכמה רגעים.
-                    </p>
-                </div>
-                <!-- Feature 3 -->
-                <div
-                    class="text-center p-6 rounded-lg bg-dark-100 border border-white/5 hover:border-gold/30 transition-colors duration-300">
-                    <div
-                        class="w-16 h-16 mx-auto bg-dark-300 rounded-full flex items-center justify-center mb-6 border border-white/10 text-gold text-2xl">
-                        <i class="fa-solid fa-spray-can"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3" data-i18n="feature_3_title">מוצרים איכותיים</h3>
-                    <p class="text-gray-400 font-light leading-relaxed" data-i18n="feature_3_desc">
-                        שימוש במוצרי העיצוב והטיפוח המובילים בעולם לשמירה על בריאות השיער והעור.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services & Pricing -->
-    <section id="services" class="py-24 bg-dark-300 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-gold font-medium tracking-widest uppercase mb-3 text-sm" data-i18n="services_kicker">התפריט שלנו</h2>
-                <h3 class="text-4xl md:text-5xl font-bold text-white" data-i18n="services_title">שירותים ומחירים</h3>
-                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
-            </div>
-
-            <div class="bg-dark-100 rounded-xl p-6 md:p-10 border border-white/5 shadow-2xl">
-                <ul class="space-y-6">
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
+                        <div class="w-10 h-10 bg-indigo-light rounded-full flex items-center justify-center text-indigo font-bold text-sm">ד.כ</div>
                         <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_haircut">תספורת גבר
-                            </h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_haircut_desc">חפיפה, תספורת מותאמת אישית, פן ועיצוב</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap" data-i18n="svc_haircut_price">החל מ-₪60</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_haircut_beard">תספורת
-                                ועיצוב זקן</h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_haircut_beard_desc">החבילה המושלמת. תספורת, סידור זקן בפירוט, חפיפה ועיצוב
-                            </p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap" data-i18n="svc_haircut_beard_price">החל מ-₪110</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_beard">עיצוב זקן
-                                בלבד</h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_beard_desc">פיסול הזקן, סידור קווים עם תער ושמנים מטפחים</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap">₪60</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_soldier">תספורת חייל
-                            </h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_soldier_desc">תספורת תקנית ומדויקת לפי נהלי הצבא (בהצגת חוגר)</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap">₪60</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_kid">תספורת ילד
-                            </h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_kid_desc">תספורת קפדנית באווירה סבלנית וטובה</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap">₪60</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_wax">ניקוי שעווה
-                                / גבות</h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_wax_desc">עיצוב גבות, שעווה אף/אוזניים וטיפוח פנים</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap">₪30</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group border-b border-white/5 pb-6">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_color">צבע /
-                                גוונים לגבר</h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_color_desc">הסתרת שיער שיבה או הוספת גוונים אופנתיים (מחיר בסיסי)
-                            </p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap" data-i18n="svc_color_price">₪100+</div>
-                    </li>
-                    <li class="flex items-center justify-between gap-6 group">
-                        <div>
-                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors" data-i18n="svc_smoothing">החלקה לגבר
-                            </h4>
-                            <p class="text-gray-400 text-sm mt-1" data-i18n="svc_smoothing_desc">החלקת קרטין / אורגנית לשיער רך, חלק וקל לעיצוב</p>
-                        </div>
-                        <div class="text-xl font-bold text-gold whitespace-nowrap">₪250</div>
-                    </li>
-                </ul>
-
-                <div class="mt-10 text-center">
-                    <button onclick="openBookingModal()"
-                        class="inline-flex items-center gap-2 bg-white text-dark-300 hover:bg-gold hover:text-white px-8 py-3 rounded-sm text-base font-bold transition-all duration-300" data-i18n-html="services_book_btn_html">
-                        לקביעת תור <i class="fa-solid fa-calendar-plus mt-0.5"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Banner / CTA (Uploaded: Tools B&W) -->
-    <section class="relative py-24 bg-dark-100 flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0 opacity-30">
-            <img src="images/tools-bw.jpg"
-                alt="כלי עבודה מספרה" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-dark-300/60"></div>
-        </div>
-        <div class="relative z-10 text-center px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6" data-i18n="banner_title">מוכן לשדרוג הבא שלך?</h2>
-            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto" data-i18n="banner_subtitle">אל תתפשר על פחות מהטוב ביותר. שריין את התור שלך
-                עכשיו והצטרף ללקוחות המרוצים שלנו.</p>
-            <button onclick="openBookingModal()"
-                class="bg-gold hover:bg-gold-hover text-white px-10 py-4 rounded-sm text-xl font-bold transition-all duration-300 shadow-xl shadow-teal-500/20 inline-block" data-i18n="banner_cta">
-                קבע תור עכשיו
-            </button>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-20 bg-dark-300">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-gold font-medium tracking-widest uppercase mb-3 text-sm">מה אומרים עלינו</h2>
-                <h3 class="text-4xl md:text-5xl font-bold text-white">ביקורות</h3>
-                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
-                <!-- Google rating summary -->
-                <div class="mt-6 inline-flex items-center gap-3 bg-dark-100 border border-white/5 rounded-full px-6 py-3">
-                    <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5">
-                    <span class="text-gold text-lg font-bold">4.97</span>
-                    <span class="text-gold text-sm">★★★★★</span>
-                    <span class="text-gray-400 text-sm">· 800+ ביקורות</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reviews-grid">
-                <!-- Review 1 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">הספר פשוט אלוף! דיוק מטורף, תשומת לב לפרטים הקטנים, ואווירה שגורמת לך להרגיש מרגע שאתה נכנס. מגיע כל שבוע כבר 3 שנים.</p>
-                    <div class="review-author">
-                        <div class="review-avatar">יל</div>
-                        <div>
-                            <div class="review-name">רון שמעוני</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
+                            <p class="font-bold text-sm text-gray-900">דוד כהן</p>
+                            <p class="text-gray-400 text-xs">לקוח קבוע</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Review 2 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">המספרה הכי מטופחת שיש. שירות ברמה אחרת, ויסקי טוב, מוזיקה מעולה ואתה יוצא משם כמו מלך. לא משנה מספרה!</p>
-                    <div class="review-author">
-                        <div class="review-avatar">דמ</div>
+                <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-1 mb-3 text-orange">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4">אווירה מדהימה, מקום נקי ומסודר. הספרים מקצועיים ונעימים. ממליץ בחום!</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-light rounded-full flex items-center justify-center text-orange font-bold text-sm">י.ל</div>
                         <div>
-                            <div class="review-name">דנה מ.</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
+                            <p class="font-bold text-sm text-gray-900">יוסי לוי</p>
+                            <p class="text-gray-400 text-xs">לקוח קבוע</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Review 3 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">הילד שלי פוחד ממספרות, אבל מאז שגילינו את המספרה — הוא מבקש להגיע רק אליו. סבלנות ויחס מיוחד.</p>
-                    <div class="review-author">
-                        <div class="review-avatar">אב</div>
+                <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-1 mb-3 text-orange">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4">הגעתי לראשונה לפי המלצה של חבר ומאז אני לקוח קבוע. שחר עשה לי עיצוב זקן מושלם. האפליקציה להזמנת תורים גם מאוד נוחה.</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-indigo-light rounded-full flex items-center justify-center text-indigo font-bold text-sm">א.מ</div>
                         <div>
-                            <div class="review-name">נדב גולן</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
+                            <p class="font-bold text-sm text-gray-900">אבי מזרחי</p>
+                            <p class="text-gray-400 text-xs">לקוח חדש</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Review 4 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">הספר יודע בדיוק מה מתאים לך ותמיד מספק. תספורת וזקן ברמה אחרת לגמרי. תודה על השירות המעולה!</p>
-                    <div class="review-author">
-                        <div class="review-avatar">שר</div>
+                <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-1 mb-3 text-orange">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4">מקום מעולה. הזמנתי תור דרך האתר תוך דקה. ביום שהגעתי לא חיכיתי בכלל. עומר ספר מדהים.</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-light rounded-full flex items-center justify-center text-orange font-bold text-sm">מ.ש</div>
                         <div>
-                            <div class="review-name">שירה רביבו</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
+                            <p class="font-bold text-sm text-gray-900">משה שמעון</p>
+                            <p class="text-gray-400 text-xs">לקוח קבוע</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Review 5 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">אווירה מדהימה ותספורת שאני תמיד מקבל עליה מחמאות. הצוות הכי טוב והמוצרים שמשתמש בהם מעולים.</p>
-                    <div class="review-author">
-                        <div class="review-avatar">מכ</div>
-                        <div>
-                            <div class="review-name">משה כהן</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
-                        </div>
+                <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-1 mb-3 text-orange">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                </div>
-
-                <!-- Review 6 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">הספר הכי מקצועי ומעולה באזור. תספורת חדשנית, עיצוב זקן מושלם, ומחירים הוגנים. אחזור בטוח!</p>
-                    <div class="review-author">
-                        <div class="review-avatar">תג</div>
+                    <p class="text-gray-600 leading-relaxed mb-4">לוקח את הבן שלי לתספורת פעם בחודש ותמיד יוצאים מרוצים. יחס אישי חם ומקצועיות ברמה הכי גבוהה.</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-indigo-light rounded-full flex items-center justify-center text-indigo font-bold text-sm">ר.ב</div>
                         <div>
-                            <div class="review-name">תומר גולן</div>
-                            <div class="review-date"><i class="fa-brands fa-google text-[10px]"></i> Google</div>
+                            <p class="font-bold text-sm text-gray-900">רועי ביטון</p>
+                            <p class="text-gray-400 text-xs">לקוח קבוע</p>
                         </div>
                     </div>
                 </div>
@@ -481,182 +437,92 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-dark-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <h2 class="text-gold font-medium tracking-widest uppercase mb-2 text-sm" data-i18n="gallery_kicker">העבודות והאווירה שלנו</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-white" data-i18n="gallery_title">הגלריה</h3>
-                </div>
-                <button onclick="openBookingModal()"
-                    class="hidden md:flex text-gray-400 hover:text-gold items-center gap-2 transition-colors" data-i18n-html="gallery_book_link_html">
-                    <span>אהבת? קבע תור</span> <i class="fa-solid fa-arrow-left text-sm"></i>
+    <!-- ═══ SECTION 7: Loyalty Check ═══ -->
+    <section class="py-20 bg-white">
+        <div class="max-w-md mx-auto px-8 text-center">
+            <span class="text-indigo font-bold text-sm tracking-wider uppercase">מועדון נאמנות</span>
+            <h2 class="text-3xl font-black mt-2 mb-4">בדוק את הנקודות שלך</h2>
+            <p class="text-gray-500 text-sm mb-8">הכנס את מספר הטלפון שלך לבדיקה</p>
+            <div class="flex gap-2">
+                <input type="tel" id="public-loyalty-phone" placeholder="05X-XXXXXXX" dir="ltr"
+                    class="flex-1 bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all">
+                <button onclick="checkPublicLoyalty()"
+                    class="bg-indigo hover:bg-indigo-hover text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-indigo/20">
+                    <i class="fa-solid fa-search"></i>
                 </button>
             </div>
-
-            <!-- CSS Grid for Uploaded Images -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Image 1: Wide Shop -->
-                <div class="md:col-span-2 relative group overflow-hidden rounded-md border border-white/5">
-                    <img src="images/team.jpg"
-                        alt="THE CLASSIC בפעולה"
-                        class="w-full h-full object-cover aspect-[16/9] group-hover:scale-105 transition-transform duration-700">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <span class="text-white font-medium text-lg" data-i18n="gallery_team_caption">צוות המומחים שלנו</span>
-                    </div>
-                </div>
-                <!-- Image 2: Head Design -->
-                <div class="relative group overflow-hidden rounded-md border border-white/5">
-                    <img src="images/hair-design.jpg"
-                        alt="עיצוב שיער מיוחד"
-                        class="w-full h-full object-cover aspect-[4/3] md:aspect-auto group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <!-- Image 3: Whisky Glasses -->
-                <div class="md:col-span-3 relative group overflow-hidden rounded-md border border-white/5 md:h-80">
-                    <img src="images/whisky.jpg"
-                        alt="פינוק ללקוחות"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        style="object-position: center 60%;">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <span class="text-white font-medium text-lg" data-i18n="gallery_vip_caption">שירות VIP לכל לקוח</span>
-                    </div>
-                </div>
-            </div>
+            <div id="public-loyalty-result"></div>
         </div>
     </section>
 
-    <!-- Loyalty Check Section (Customer-facing) -->
-    <section id="loyalty-check" class="py-16 bg-dark-200">
-        <div class="max-w-md mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-gold font-medium tracking-widest uppercase mb-3 text-sm">מועדון נאמנות</h2>
-                <h3 class="text-3xl font-bold text-white">⭐ בדוק את הנקודות שלך</h3>
-                <div class="w-24 h-1 bg-gold mx-auto mt-4"></div>
-            </div>
-            <div class="bg-dark-100 rounded-2xl border border-white/5 p-6 shadow-2xl">
-                <p class="text-gray-400 text-sm text-center mb-4">הכנס את מספר הטלפון שלך כדי לבדוק את הסטטוס שלך במועדון הנאמנות</p>
-                <div class="flex gap-2 mb-2">
-                    <input type="tel" id="public-loyalty-phone" placeholder="05X-XXXXXXX" dir="ltr"
-                        class="flex-1 bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold"
-                        onkeydown="if(event.key==='Enter') checkPublicLoyalty()">
-                    <button onclick="checkPublicLoyalty()"
-                        class="bg-gold hover:bg-gold-hover text-white px-5 rounded-xl font-bold transition-colors">
-                        <i class="fa-solid fa-search"></i>
-                    </button>
-                </div>
-                <div id="public-loyalty-result"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Contact -->
-    <footer id="contact" class="bg-dark-300 pt-20 pb-10 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-                <!-- Brand Info -->
+    <!-- ═══ Footer ═══ -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
-                    <a href="#"
-                        class="text-3xl font-bold tracking-wider text-white uppercase flex items-center gap-2 mb-6">
-                        <i class="fa-solid fa-scissors text-gold"></i>
-                        <span>THE CLASSIC</span>
+                    <h3 class="text-xl font-black">THE CLASSIC BARBERSHOP</h3>
+                    <p class="text-gray-400 text-sm mt-1">דיזנגוף 120, תל אביב | 03-1234567</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-indigo transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <p class="text-gray-400 mb-6 leading-relaxed" data-i18n="footer_about">
-                        היעד שלך לתספורת מדוייקת, טיפוח זקן מושלם וחוויה של פעם בחיים. נתראה על הכיסא.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 rounded-full bg-dark-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold transition-all">
-                            <i class="fa-brands fa-instagram text-lg"></i>
-                        </a>
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 rounded-full bg-dark-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold transition-all">
-                            <i class="fa-brands fa-facebook-f text-lg"></i>
-                        </a>
-                        <a href="#" target="_blank"
-                            class="w-10 h-10 rounded-full bg-dark-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold transition-all">
-                            <i class="fa-brands fa-tiktok text-lg"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Contact Details -->
-                <div>
-                    <h4 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-2 inline-block" data-i18n="footer_contact">צור קשר
-                    </h4>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3 text-gray-400">
-                            <i class="fa-solid fa-location-dot mt-1 text-gold"></i>
-                            <span data-i18n-html="footer_address_html">דיזנגוף 120,<br>תל אביב</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-400">
-                            <i class="fa-solid fa-phone text-gold"></i>
-                            <a href="tel:0501234567" class="hover:text-white transition-colors"
-                                dir="ltr">03-1234567</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Opening Hours -->
-                <div>
-                    <h4 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-2 inline-block" data-i18n="footer_hours_title">שעות פעילות
-                    </h4>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex justify-between border-b border-white/5 pb-2">
-                            <span data-i18n="footer_days_sun_thu">ראשון - חמישי</span>
-                            <span dir="ltr">09:00 - 20:00</span>
-                        </li>
-                        <li class="flex justify-between border-b border-white/5 pb-2">
-                            <span data-i18n="footer_days_fri">שישי</span>
-                            <span dir="ltr">08:00 - 15:00</span>
-                        </li>
-                        <li class="flex justify-between pb-2 text-dark-100 bg-red-900/20 px-2 rounded mt-2">
-                            <span class="text-red-400" data-i18n="footer_days_sat">שבת</span>
-                            <span class="text-red-400" data-i18n="footer_closed">סגור</span>
-                        </li>
-                    </ul>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-indigo transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-indigo transition-colors">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="tel:03-1234567" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-indigo transition-colors">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
                 </div>
             </div>
-
-            <div class="border-t border-white/10 pt-8 flex justify-center items-center text-sm text-gray-500">
-                <p data-i18n-html="footer_copyright_html">&copy; <span id="footer-year"></span> THE CLASSIC. כל הזכויות שמורות.</p>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; <span id="footer-year"></span> THE CLASSIC BARBERSHOP. כל הזכויות שמורות. |
+                    <a href="https://gignow.co.il" target="_blank" class="text-indigo hover:underline">בניית אתר ע״י GigNow</a>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- APP-LIKE BOOKING MODAL SYSTEM -->
-    <!-- ========================================== -->
+    <!-- ═══ Floating CTA Button ═══ -->
+    <button onclick="openBookingModal()" id="floating-cta"
+        class="fixed bottom-6 left-6 z-30 w-16 h-16 bg-orange hover:bg-orange-hover text-white rounded-full shadow-2xl shadow-orange/40 flex items-center justify-center text-2xl transition-all hover:scale-110 active:scale-95">
+        <i class="fa-solid fa-scissors"></i>
+    </button>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- BOOKING MODAL (Restyled — White/Indigo) -->
+    <!-- ══════════════════════════════════════ -->
     <div id="booking-modal-overlay" onclick="if(event.target===this)closeBookingModal()"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10001] opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[10001] opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
 
         <div id="booking-modal-content"
-            class="bg-dark-200 border border-white/10 rounded-2xl w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh] overflow-hidden modal-exit">
+            class="bg-white rounded-2xl w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh] overflow-hidden modal-exit border border-gray-200">
 
             <!-- Header -->
-            <div class="p-5 border-b border-white/10 flex justify-between items-center bg-dark-100 flex-shrink-0">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2" data-i18n-html="booking_title_html">
-                    <i class="fa-solid fa-calendar-check text-gold"></i> הזמנת תור
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-surface-muted flex-shrink-0">
+                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check text-indigo"></i> הזמנת תור
                 </h3>
                 <button onclick="closeBookingModal()"
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-dark-300 text-gray-400 hover:text-white transition-colors">
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <!-- Progress Bar -->
-            <div class="flex bg-dark-300 h-1.5 flex-shrink-0">
-                <div id="booking-progress" class="bg-gold h-full transition-all duration-300" style="width: 25%"></div>
+            <div class="flex bg-gray-100 h-1.5 flex-shrink-0">
+                <div id="booking-progress" class="bg-indigo h-full transition-all duration-300 rounded-full" style="width: 16.6%"></div>
             </div>
 
             <!-- Body Area (Scrollable) -->
-            <div class="p-5 overflow-y-auto custom-scrollbar flex-grow" style="min-height:0">
+            <div class="p-5 overflow-y-auto flex-grow" style="min-height:0">
 
                 <!-- STEP 1: Select Barber -->
                 <div id="step-1" class="booking-step block">
-                    <h4 class="text-lg font-medium text-white mb-4" data-i18n="booking_step1_title">בחר ספר</h4>
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">בחר ספר</h4>
                     <div class="space-y-3" id="barber-options-container">
                         <div class="flex justify-center py-4"><div class="spinner"></div></div>
                     </div>
@@ -664,132 +530,116 @@
 
                 <!-- STEP 2: Select Service -->
                 <div id="step-2" class="booking-step hidden">
-                    <h4 class="text-lg font-medium text-white mb-4" data-i18n-html="booking_step2_title_html">בחר שירות (<span id="selected-barber-name"
-                            class="text-gold"></span>)</h4>
-                    <div class="space-y-3" id="service-options-container">
-                        <!-- Services will be populated dynamically based on barber selection -->
-                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">בחר שירות (<span id="selected-barber-name" class="text-indigo"></span>)</h4>
+                    <div class="space-y-3" id="service-options-container"></div>
                 </div>
 
                 <!-- STEP 3: Date & Time -->
                 <div id="step-3" class="booking-step hidden">
-                    <h4 class="text-lg font-medium text-white mb-4" data-i18n="booking_step3_title">מתי נוח לך?</h4>
-
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">מתי נוח לך?</h4>
                     <div class="mb-5">
-                    <label class="block text-sm text-gray-400 mb-2" data-i18n="booking_label_pick_date">בחר תאריך</label>
-                    <input type="hidden" id="booking-date">
-                    <div id="calendar-container" class="bg-dark-300 border border-white/10 rounded-xl p-4"></div>
+                        <label class="block text-sm text-gray-500 mb-2">בחר תאריך</label>
+                        <input type="hidden" id="booking-date">
+                        <div id="calendar-container" class="bg-surface-alt border border-gray-200 rounded-xl p-4"></div>
                     </div>
-
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2" data-i18n="booking_label_pick_time">בחר שעה</label>
-                        <div class="grid grid-cols-3 gap-2" id="time-slots">
-                            <!-- JS Will generate time slots here -->
-                        </div>
+                        <label class="block text-sm text-gray-500 mb-2">בחר שעה</label>
+                        <div class="grid grid-cols-3 gap-2" id="time-slots"></div>
                         <input type="hidden" id="booking-time">
                     </div>
                 </div>
 
                 <!-- STEP 4: Details -->
                 <div id="step-4" class="booking-step hidden">
-                    <h4 class="text-lg font-medium text-white mb-4" data-i18n="booking_step4_title">פרטים אחרונים</h4>
-
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">פרטים אחרונים</h4>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2" data-i18n="booking_label_full_name">שם מלא</label>
-                            <input type="text" id="user-name" placeholder="הכנס שם מלא" data-i18n-placeholder="booking_ph_full_name"
-                                class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold transition-colors"
-                                required>
+                            <label class="block text-sm text-gray-500 mb-2">שם מלא</label>
+                            <input type="text" id="user-name" placeholder="הכנס שם מלא"
+                                class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all" required>
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2" data-i18n="booking_label_phone">מספר טלפון</label>
-                            <input type="tel" id="user-phone" placeholder="05X-XXXXXXX" data-i18n-placeholder="booking_ph_phone"
-                                class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold transition-colors text-right"
-                                dir="ltr" required>
+                            <label class="block text-sm text-gray-500 mb-2">מספר טלפון</label>
+                            <input type="tel" id="user-phone" placeholder="05X-XXXXXXX"
+                                class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all text-right" dir="ltr" required>
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">אימייל (לקבלת אישור)</label>
+                            <label class="block text-sm text-gray-500 mb-2">אימייל (לקבלת אישור)</label>
                             <input type="email" id="user-email" placeholder="example@email.com"
-                                class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold transition-colors"
-                                dir="ltr">
+                                class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all" dir="ltr">
                         </div>
-
-                        <div class="mt-4 p-4 bg-dark-300 rounded-xl border border-white/5">
-                            <h5 class="text-sm font-medium text-gold mb-2" data-i18n="booking_summary_title">סיכום התור:</h5>
-                            <p class="text-sm text-gray-300 mb-1" id="summary-barber"></p>
-                            <p class="text-sm text-gray-300 mb-1" id="summary-service"></p>
-                            <p class="text-sm text-gray-300" id="summary-datetime"></p>
+                        <div class="mt-4 p-4 bg-indigo-light rounded-xl border border-indigo/10">
+                            <h5 class="text-sm font-bold text-indigo mb-2">סיכום התור:</h5>
+                            <p class="text-sm text-gray-600 mb-1" id="summary-barber"></p>
+                            <p class="text-sm text-gray-600 mb-1" id="summary-service"></p>
+                            <p class="text-sm text-gray-600" id="summary-datetime"></p>
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 5: OTP Verification -->
+                <!-- STEP 5: OTP -->
                 <div id="step-5" class="booking-step hidden">
-                    <h4 class="text-lg font-medium text-white mb-4">אימות מספר טלפון</h4>
-                    <p class="text-sm text-gray-400 mb-6">שלחנו קוד אימות ב-SMS למספר <span id="verify-phone-display" class="text-gold" dir="ltr"></span>. אנא הזן אותו כאן כדי לאשר את התור:</p>
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">אימות מספר טלפון</h4>
+                    <p class="text-sm text-gray-500 mb-6">שלחנו קוד אימות ב-SMS למספר <span id="verify-phone-display" class="text-indigo font-bold" dir="ltr"></span></p>
                     <div class="mb-6 max-w-xs mx-auto">
                         <input type="text" id="otp-input" placeholder="0 0 0 0 0 0" maxlength="6"
-                            class="w-full text-center text-3xl tracking-[0.3em] font-bold bg-dark-300 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-gold transition-colors shadow-inner"
-                            dir="ltr">
+                            class="w-full text-center text-3xl tracking-[0.3em] font-bold bg-surface-alt border border-gray-200 rounded-xl p-4 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all" dir="ltr">
                     </div>
                 </div>
 
                 <!-- STEP 6: Success -->
                 <div id="step-6" class="booking-step hidden text-center py-8">
-                    <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fa-solid fa-clock text-4xl text-gold"></i>
+                    <div class="w-20 h-20 bg-green-50 border-2 border-green-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-check text-4xl text-green-500"></i>
                     </div>
-                    <h4 class="text-2xl font-bold text-white mb-2">התור נשלח לאישור!</h4>
-                    <p class="text-gray-400 mb-4">הספר יאשר את התור שלך בהקדם. השעה שמורה עבורך ולקוחות אחרים היא לא זמינה להזמנה.</p>
-                    
-                    <!-- Push Notification CTA -->
-                    <div id="push-cta-booking" class="mb-6 p-4 bg-dark-300 rounded-xl border border-gold/20">
-                        <p class="text-sm text-gray-300 mb-3">
-                            <i class="fa-solid fa-bell text-gold"></i>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-2">התור נשלח לאישור!</h4>
+                    <p class="text-gray-500 mb-4">הספר יאשר את התור שלך בהקדם. השעה שמורה עבורך.</p>
+
+                    <div id="push-cta-booking" class="mb-6 p-4 bg-indigo-light rounded-xl border border-indigo/10">
+                        <p class="text-sm text-gray-600 mb-3">
+                            <i class="fa-solid fa-bell text-indigo"></i>
                             רוצה לקבל עדכונים על התור שלך?
                         </p>
                         <button onclick="enablePushFromBooking()" id="push-enable-booking-btn"
-                            class="bg-gold hover:bg-gold-hover text-white px-6 py-2 rounded-xl font-bold text-sm transition-all">
+                            class="bg-indigo hover:bg-indigo-hover text-white px-6 py-2 rounded-xl font-bold text-sm transition-all">
                             <i class="fa-solid fa-bell ml-1"></i> הפעל התראות
                         </button>
                     </div>
 
                     <button onclick="closeBookingModal()"
-                        class="bg-dark-300 hover:bg-dark-100 border border-white/10 text-white px-8 py-3 rounded-xl font-medium transition-all w-full" data-i18n="booking_step6_close">
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-8 py-3 rounded-xl font-medium transition-all w-full">
                         סיום וחזרה לאתר
                     </button>
                 </div>
-
             </div>
 
             <!-- Footer Actions -->
-            <div id="modal-footer" class="p-4 border-t border-white/10 bg-dark-100 flex gap-3 flex-shrink-0">
+            <div id="modal-footer" class="p-4 border-t border-gray-100 bg-surface-muted flex gap-3 flex-shrink-0">
                 <button type="button" id="btn-back" onclick="prevStep()"
-                    class="hidden px-6 py-3 rounded-xl border border-white/10 text-white font-medium hover:bg-dark-300 transition-colors" data-i18n="booking_btn_back">
+                    class="hidden px-6 py-3 rounded-xl border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
                     חזור
                 </button>
                 <button type="button" id="btn-next" onclick="nextStep()"
-                    class="flex-1 bg-gold hover:bg-gold-hover text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-teal-500/20 disabled:opacity-50 disabled:cursor-not-allowed" data-i18n="booking_btn_next">
+                    class="flex-1 bg-indigo hover:bg-indigo-hover text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-indigo/20 disabled:opacity-50 disabled:cursor-not-allowed">
                     המשך לשלב הבא
                 </button>
             </div>
-
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- BARBER DASHBOARD MODAL (SUPABASE READY) -->
-    <!-- ========================================== -->
-    <div id="dashboard-overlay" class="fixed inset-0 bg-dark-300 z-50 hidden flex-col transition-opacity duration-300">
+    <!-- ══════════════════════════════════════ -->
+    <!-- DASHBOARD (Restyled — White/Indigo) -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="dashboard-overlay" class="fixed inset-0 bg-white z-50 hidden flex-col transition-opacity duration-300">
         <!-- Header -->
-        <div class="h-16 md:h-20 border-b border-white/10 flex justify-between items-center px-4 md:px-8 bg-dark-200 shadow-lg flex-shrink-0">
-            <h2 class="text-base md:text-xl font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-scissors text-gold"></i>
+        <div class="h-16 md:h-20 border-b border-gray-200 flex justify-between items-center px-4 md:px-8 bg-white shadow-sm flex-shrink-0">
+            <h2 class="text-base md:text-xl font-bold text-gray-900 flex items-center gap-2">
+                <i class="fa-solid fa-scissors text-indigo"></i>
                 <span class="hidden sm:inline">לוח בקרה - </span>
-                <span id="dash-header-name" class="text-gold"></span>
+                <span id="dash-header-name" class="text-indigo"></span>
             </h2>
             <button onclick="closeDashboard()"
-                class="text-gray-400 hover:text-white bg-dark-100 w-9 h-9 md:w-10 md:h-10 rounded-full flex justify-center items-center transition-colors">
+                class="text-gray-400 hover:text-gray-700 bg-gray-100 w-9 h-9 md:w-10 md:h-10 rounded-full flex justify-center items-center transition-colors">
                 <i class="fa-solid fa-xmark text-lg md:text-xl"></i>
             </button>
         </div>
@@ -798,29 +648,28 @@
         <div class="flex-grow flex flex-col overflow-hidden">
 
             <!-- Login View -->
-            <div id="dash-login" class="flex-grow overflow-y-auto custom-scrollbar p-4 md:p-8">
-                <div class="max-w-md mx-auto bg-dark-100 p-8 rounded-2xl border border-white/5 mt-10 shadow-2xl">
-                    <div
-                        class="w-16 h-16 bg-dark-300 rounded-full flex items-center justify-center mx-auto mb-6 text-gold text-2xl border border-white/10">
+            <div id="dash-login" class="flex-grow overflow-y-auto p-4 md:p-8 bg-surface-alt">
+                <div class="max-w-md mx-auto bg-white p-8 rounded-2xl border border-gray-200 mt-10 shadow-lg">
+                    <div class="w-16 h-16 bg-indigo-light rounded-full flex items-center justify-center mx-auto mb-6 text-indigo text-2xl">
                         <i class="fa-solid fa-lock"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-center text-white mb-6">התחברות ליומן</h3>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-6">התחברות ליומן</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">בחר שם ספר</label>
+                            <label class="block text-sm text-gray-500 mb-2">בחר שם ספר</label>
                             <select id="dash-barber-select"
-                                class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                                class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all appearance-none cursor-pointer">
                                 <option value="">טוען...</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">סיסמה</label>
+                            <label class="block text-sm text-gray-500 mb-2">סיסמה</label>
                             <input type="password" id="dash-password" placeholder="הכנס סיסמה"
                                 onkeydown="if(event.key==='Enter') dashLogin()"
-                                class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold transition-colors">
+                                class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo focus:ring-2 focus:ring-indigo/10 transition-all">
                         </div>
                         <button onclick="dashLogin()"
-                            class="w-full bg-gold hover:bg-gold-hover text-white p-3 rounded-xl font-bold transition-colors mt-2 shadow-lg shadow-teal-500/20">
+                            class="w-full bg-indigo hover:bg-indigo-hover text-white p-3 rounded-xl font-bold transition-colors mt-2 shadow-lg shadow-indigo/20">
                             היכנס למערכת
                         </button>
                     </div>
@@ -831,7 +680,7 @@
             <div id="dash-main" class="hidden flex-grow flex flex-col overflow-hidden">
 
                 <!-- Desktop tabs -->
-                <div class="hidden md:flex border-b border-white/10 bg-dark-200 px-8 gap-1 flex-shrink-0">
+                <div class="hidden md:flex border-b border-gray-200 bg-white px-8 gap-1 flex-shrink-0">
                     <button class="dash-tab-btn active" data-tab="appointments" onclick="switchTab('appointments')">
                         <i class="fa-solid fa-calendar-days"></i> תורים
                     </button>
@@ -866,14 +715,14 @@
                 </div>
 
                 <!-- Tab Content -->
-                <div class="flex-grow overflow-y-auto custom-scrollbar pb-28 md:pb-8" style="-webkit-overflow-scrolling: touch;">
+                <div class="flex-grow overflow-y-auto pb-28 md:pb-8 bg-surface-alt" style="-webkit-overflow-scrolling: touch;">
                     <div class="max-w-5xl mx-auto p-4 md:p-8">
 
                         <!-- TAB: Appointments -->
                         <div id="tab-appointments" class="dash-tab-content">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
                                 <div>
-                                    <h3 class="text-2xl font-bold text-white">📅 התורים שלי</h3>
+                                    <h3 class="text-2xl font-bold text-gray-900">📅 התורים שלי</h3>
                                     <p class="text-gray-400 text-sm mt-1" id="appt-date-label">היום</p>
                                 </div>
                                 <div class="flex items-center gap-2">
@@ -881,28 +730,27 @@
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </button>
                                     <input type="date" id="appt-date-picker" onchange="loadAppointments()"
-                                        class="bg-dark-100 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-gold">
+                                        class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm focus:outline-none focus:border-indigo">
                                     <button onclick="appointmentsShiftDay(1)" class="dash-icon-btn" title="יום הבא">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </button>
-                                    <button onclick="appointmentsToday()" class="text-xs px-3 py-2 bg-gold/10 border border-gold/30 text-gold rounded-lg hover:bg-gold/20 transition-colors">
+                                    <button onclick="appointmentsToday()" class="text-xs px-3 py-2 bg-indigo/10 border border-indigo/30 text-indigo rounded-lg hover:bg-indigo/20 transition-colors">
                                         היום
                                     </button>
                                 </div>
                             </div>
 
-                            <!-- Stats -->
                             <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6">
                                 <div class="stat-card">
-                                    <div class="stat-value text-gold" id="stat-total">0</div>
+                                    <div class="stat-value text-indigo" id="stat-total">0</div>
                                     <div class="stat-label">סך הכל</div>
                                 </div>
                                 <div class="stat-card">
-                                    <div class="stat-value text-green-400" id="stat-completed">0</div>
+                                    <div class="stat-value text-green-500" id="stat-completed">0</div>
                                     <div class="stat-label">הושלמו</div>
                                 </div>
                                 <div class="stat-card">
-                                    <div class="stat-value text-blue-400" id="stat-pending">0</div>
+                                    <div class="stat-value text-blue-500" id="stat-pending">0</div>
                                     <div class="stat-label">ממתינים</div>
                                 </div>
                             </div>
@@ -912,51 +760,43 @@
 
                         <!-- TAB: New Appointment -->
                         <div id="tab-new-appt" class="dash-tab-content hidden">
-                            <h3 class="text-2xl font-bold text-white mb-1" data-i18n="dash_new_title">➕ הוספת תור ידני</h3>
-                            <p class="text-gray-400 text-sm mb-6" data-i18n="dash_new_subtitle">צור תור חדש ללקוח שיצר קשר ישיר</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">➕ הוספת תור ידני</h3>
+                            <p class="text-gray-400 text-sm mb-6">צור תור חדש ללקוח שיצר קשר ישיר</p>
 
-                            <div class="bg-dark-100 rounded-2xl border border-white/5 p-4 md:p-6 space-y-5">
-                                <!-- Service -->
+                            <div class="bg-white rounded-2xl border border-gray-200 p-4 md:p-6 space-y-5 shadow-sm">
                                 <div>
-                                    <label class="block text-sm font-semibold text-white mb-2" data-i18n="dash_label_service">שירות</label>
+                                    <label class="block text-sm font-semibold text-gray-900 mb-2">שירות</label>
                                     <select id="new-appt-service" required
-                                        class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold cursor-pointer">
-                                        <option value="" data-i18n="dash_loading">טוען...</option>
+                                        class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo cursor-pointer">
+                                        <option value="">טוען...</option>
                                     </select>
                                 </div>
-
-                                <!-- Calendar -->
                                 <div>
-                                    <label class="block text-sm font-semibold text-white mb-2" data-i18n="dash_label_date">תאריך</label>
-                                    <div id="new-appt-calendar" class="bg-dark-300 rounded-xl border border-white/10 p-4"></div>
+                                    <label class="block text-sm font-semibold text-gray-900 mb-2">תאריך</label>
+                                    <div id="new-appt-calendar" class="bg-surface-alt rounded-xl border border-gray-200 p-4"></div>
                                     <input type="hidden" id="new-appt-date">
                                 </div>
-
-                                <!-- Time slots -->
                                 <div>
-                                    <label class="block text-sm font-semibold text-white mb-2" data-i18n="dash_label_time">שעה</label>
+                                    <label class="block text-sm font-semibold text-gray-900 mb-2">שעה</label>
                                     <div id="new-appt-times" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                                        <div class="col-span-full text-center text-gray-500 text-sm py-3" data-i18n="dash_pick_date_first">בחר תאריך תחילה</div>
+                                        <div class="col-span-full text-center text-gray-400 text-sm py-3">בחר תאריך תחילה</div>
                                     </div>
                                     <input type="hidden" id="new-appt-time">
                                 </div>
-
-                                <!-- Customer -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-semibold text-white mb-2" data-i18n="dash_label_customer_name">שם הלקוח</label>
-                                        <input type="text" id="new-appt-name" placeholder="שם מלא" data-i18n-placeholder="dash_ph_customer_name"
-                                            class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                                        <label class="block text-sm font-semibold text-gray-900 mb-2">שם הלקוח</label>
+                                        <input type="text" id="new-appt-name" placeholder="שם מלא"
+                                            class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-semibold text-white mb-2" data-i18n="dash_label_customer_phone">טלפון</label>
-                                        <input type="tel" id="new-appt-phone" placeholder="050-1234567" data-i18n-placeholder="dash_ph_customer_phone" dir="ltr"
-                                            class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                                        <label class="block text-sm font-semibold text-gray-900 mb-2">טלפון</label>
+                                        <input type="tel" id="new-appt-phone" placeholder="050-1234567" dir="ltr"
+                                            class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                                     </div>
                                 </div>
-
                                 <button onclick="submitManualAppointment()"
-                                    class="w-full bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold transition-colors shadow-lg shadow-teal-500/20" data-i18n-html="dash_btn_create_appt_html">
+                                    class="w-full bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold transition-colors shadow-lg shadow-indigo/20">
                                     <i class="fa-solid fa-check ml-2"></i> צור תור
                                 </button>
                             </div>
@@ -971,11 +811,11 @@
                         <div id="tab-prices" class="dash-tab-content hidden">
                             <div class="flex items-center justify-between mb-6">
                                 <div>
-                                    <h3 class="text-2xl font-bold text-white">💰 מחירון</h3>
+                                    <h3 class="text-2xl font-bold text-gray-900">💰 מחירון</h3>
                                     <p class="text-gray-400 text-sm mt-1">נהל את השירותים והמחירים</p>
                                 </div>
                                 <button onclick="openAddService()"
-                                    class="bg-gold/10 border border-gold/30 text-gold hover:bg-gold/20 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                    class="bg-indigo/10 border border-indigo/30 text-indigo hover:bg-indigo/20 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
                                     <i class="fa-solid fa-plus ml-1"></i> שירות חדש
                                 </button>
                             </div>
@@ -985,11 +825,11 @@
                         <!-- TAB: Customers -->
                         <div id="tab-customers" class="dash-tab-content hidden">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-2xl font-bold text-white">👥 היסטוריית לקוחות</h3>
+                                <h3 class="text-2xl font-bold text-gray-900">👥 היסטוריית לקוחות</h3>
                             </div>
                             <div class="mb-4">
                                 <input type="text" id="customer-search" placeholder="🔍 חפש לפי שם או טלפון..." oninput="filterCustomers()"
-                                    class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold placeholder-gray-600">
+                                    class="w-full bg-white border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo placeholder-gray-400">
                             </div>
                             <div id="customers-list"></div>
                         </div>
@@ -1002,83 +842,79 @@
 
                         <!-- TAB: Manage Barbers (admin only) -->
                         <div id="tab-barbers" class="dash-tab-content hidden">
-                            <h3 class="text-2xl font-bold text-white mb-1">💈 ניהול ספרים</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">💈 ניהול ספרים</h3>
                             <p class="text-gray-400 text-sm mb-6">הוסף, ערוך או מחק ספרים מהמערכת</p>
-
-                            <!-- Add barber form -->
-                            <div class="bg-dark-100 rounded-2xl border border-white/5 p-4 md:p-6 mb-6">
-                                <h4 class="text-lg font-bold text-gold mb-4"><i class="fa-solid fa-user-plus ml-1"></i> הוספת ספר חדש</h4>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-4 md:p-6 mb-6 shadow-sm">
+                                <h4 class="text-lg font-bold text-indigo mb-4"><i class="fa-solid fa-user-plus ml-1"></i> הוספת ספר חדש</h4>
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                     <input type="text" id="new-barber-name" placeholder="שם הספר"
-                                        class="bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                                        class="bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                                     <input type="number" id="new-barber-price" placeholder="מחיר בסיס" value="60"
-                                        class="bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                                        class="bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                                     <button onclick="addBarber()"
-                                        class="bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold transition-all">
+                                        class="bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold transition-all">
                                         <i class="fa-solid fa-plus ml-1"></i> הוסף
                                     </button>
                                 </div>
                             </div>
-
-                            <!-- Barbers list -->
                             <div id="barbers-manage-list" class="space-y-3"></div>
                         </div>
 
                         <!-- TAB: Profile -->
                         <div id="tab-profile" class="dash-tab-content hidden">
-                            <h3 class="text-2xl font-bold text-white mb-6">👤 הפרופיל שלי</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">👤 הפרופיל שלי</h3>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6">
                                 <div class="stat-card">
-                                    <div class="stat-value text-gold" id="profile-month-count">0</div>
+                                    <div class="stat-value text-indigo" id="profile-month-count">0</div>
                                     <div class="stat-label">תורים החודש</div>
                                 </div>
                                 <div class="stat-card">
-                                    <div class="stat-value text-green-400" id="profile-month-revenue">₪0</div>
+                                    <div class="stat-value text-green-500" id="profile-month-revenue">₪0</div>
                                     <div class="stat-label">הכנסה משוערת</div>
                                 </div>
                                 <div class="stat-card">
-                                    <div class="stat-value text-blue-400" id="profile-total-count">0</div>
+                                    <div class="stat-value text-blue-500" id="profile-total-count">0</div>
                                     <div class="stat-label">סך תורים</div>
                                 </div>
                             </div>
 
-                            <div class="bg-dark-100 rounded-2xl border border-white/5 p-4 md:p-6 mb-4">
-                                <h4 class="text-white font-bold mb-4">פרטי הספר</h4>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-4 md:p-6 mb-4 shadow-sm">
+                                <h4 class="text-gray-900 font-bold mb-4">פרטי הספר</h4>
                                 <div class="space-y-4">
                                     <div>
-                                        <label class="block text-sm text-gray-400 mb-2">שם</label>
+                                        <label class="block text-sm text-gray-500 mb-2">שם</label>
                                         <input type="text" id="profile-name" disabled
-                                            class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-gray-400">
+                                            class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-500">
                                     </div>
                                     <div>
-                                        <label class="block text-sm text-gray-400 mb-2">מחיר בסיס (₪)</label>
+                                        <label class="block text-sm text-gray-500 mb-2">מחיר בסיס (₪)</label>
                                         <input type="number" id="profile-base-price"
-                                            class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold mb-2">
+                                            class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo mb-2">
                                         <button onclick="saveBasePrice()"
-                                            class="w-full bg-gold hover:bg-gold-hover text-white py-2.5 rounded-xl font-bold transition-colors text-sm">
+                                            class="w-full bg-indigo hover:bg-indigo-hover text-white py-2.5 rounded-xl font-bold transition-colors text-sm">
                                             <i class="fa-solid fa-floppy-disk ml-1"></i> שמור מחיר
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bg-dark-100 rounded-2xl border border-white/5 p-4 md:p-6 mb-4">
-                                <h4 class="text-white font-bold mb-4">🔔 התראות פוש</h4>
-                                <p class="text-gray-400 text-sm mb-3">הפעל התראות כדי לקבל עדכונים על תורים חדשים</p>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-4 md:p-6 mb-4 shadow-sm">
+                                <h4 class="text-gray-900 font-bold mb-4">🔔 התראות פוש</h4>
+                                <p class="text-gray-500 text-sm mb-3">הפעל התראות כדי לקבל עדכונים על תורים חדשים</p>
                                 <button onclick="enableDashPush()"
-                                    class="w-full bg-gold hover:bg-gold-hover text-white py-2.5 rounded-xl font-bold transition-colors text-sm">
+                                    class="w-full bg-indigo hover:bg-indigo-hover text-white py-2.5 rounded-xl font-bold transition-colors text-sm">
                                     <i class="fa-solid fa-bell ml-1"></i> הפעל התראות
                                 </button>
                             </div>
 
-                            <div class="bg-dark-100 rounded-2xl border border-white/5 p-4 md:p-6">
-                                <h4 class="text-white font-bold mb-4">שינוי סיסמה</h4>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-4 md:p-6 shadow-sm">
+                                <h4 class="text-gray-900 font-bold mb-4">שינוי סיסמה</h4>
                                 <div class="space-y-3">
                                     <input type="password" id="profile-new-password" placeholder="סיסמה חדשה"
-                                        class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                                        class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                                     <button onclick="changePassword()"
-                                        class="w-full bg-dark-300 border border-white/10 hover:border-gold text-white py-3 rounded-xl font-semibold transition-colors">
+                                        class="w-full bg-gray-100 border border-gray-200 hover:border-indigo text-gray-700 py-3 rounded-xl font-semibold transition-colors">
                                         <i class="fa-solid fa-key ml-2"></i> עדכן סיסמה
                                     </button>
                                 </div>
@@ -1089,7 +925,7 @@
                 </div>
 
                 <!-- Mobile bottom navigation -->
-                <div class="md:hidden fixed bottom-0 left-0 right-0 bg-dark-200 border-t border-white/10 flex justify-around py-2 px-1 z-10">
+                <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-2 px-1 z-10 shadow-lg">
                     <button class="dash-mobile-tab active" data-tab="appointments" onclick="switchTab('appointments')">
                         <i class="fa-solid fa-calendar-days"></i>
                         <span>תורים</span>
@@ -1133,98 +969,97 @@
     </div>
 
     <!-- Reschedule modal -->
-    <div id="reschedule-modal" class="hidden fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
-      <div class="bg-dark-100 rounded-2xl border border-white/10 max-w-md w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto custom-scrollbar">
+    <div id="reschedule-modal" class="hidden fixed inset-0 bg-black/40 z-[60] flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl border border-gray-200 max-w-md w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-gold"></i> שינוי תור</h3>
-          <button onclick="closeReschedule()" class="w-8 h-8 flex items-center justify-center rounded-full bg-dark-300 text-gray-400 hover:text-white">
+          <h3 class="text-xl font-bold text-gray-900"><i class="fa-solid fa-clock-rotate-left text-indigo"></i> שינוי תור</h3>
+          <button onclick="closeReschedule()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:text-gray-700">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <div class="mb-4 p-3 bg-dark-300 rounded-xl border border-white/5">
-          <p class="text-sm text-gray-400">לקוח: <span class="text-white font-medium" id="reschedule-customer-name"></span></p>
-          <p class="text-sm text-gray-400 mt-1">תור נוכחי: <span class="text-gold" id="reschedule-current-info"></span></p>
+        <div class="mb-4 p-3 bg-surface-alt rounded-xl border border-gray-100">
+          <p class="text-sm text-gray-500">לקוח: <span class="text-gray-900 font-medium" id="reschedule-customer-name"></span></p>
+          <p class="text-sm text-gray-500 mt-1">תור נוכחי: <span class="text-indigo" id="reschedule-current-info"></span></p>
         </div>
         <div class="mb-4">
-          <label class="block text-sm font-semibold text-white mb-2">תאריך חדש</label>
-          <div id="reschedule-calendar" class="bg-dark-300 rounded-xl border border-white/10 p-4"></div>
+          <label class="block text-sm font-semibold text-gray-900 mb-2">תאריך חדש</label>
+          <div id="reschedule-calendar" class="bg-surface-alt rounded-xl border border-gray-200 p-4"></div>
           <input type="hidden" id="reschedule-date">
         </div>
         <div class="mb-5">
-          <label class="block text-sm font-semibold text-white mb-2">שעה חדשה</label>
+          <label class="block text-sm font-semibold text-gray-900 mb-2">שעה חדשה</label>
           <div id="reschedule-times" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
-            <div class="col-span-full text-center text-gray-500 text-sm py-3">בחר תאריך תחילה</div>
+            <div class="col-span-full text-center text-gray-400 text-sm py-3">בחר תאריך תחילה</div>
           </div>
           <input type="hidden" id="reschedule-time">
         </div>
         <div class="flex gap-2">
-          <button onclick="closeReschedule()" class="flex-1 bg-dark-300 border border-white/10 text-white py-3 rounded-xl hover:bg-dark-200 font-medium">ביטול</button>
-          <button onclick="submitReschedule()" class="flex-1 bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold shadow-lg shadow-teal-500/20">
+          <button onclick="closeReschedule()" class="flex-1 bg-gray-100 border border-gray-200 text-gray-700 py-3 rounded-xl hover:bg-gray-50 font-medium">ביטול</button>
+          <button onclick="submitReschedule()" class="flex-1 bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold shadow-lg shadow-indigo/20">
             <i class="fa-solid fa-check ml-1"></i> עדכן תור
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Edit price modal -->
     <!-- Break modal -->
-    <div id="break-modal" class="hidden fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
-      <div class="bg-dark-100 rounded-2xl border border-white/10 max-w-xs w-full p-5 shadow-2xl">
-        <h3 class="text-lg font-bold text-white mb-4 text-center">☕ הוספת הפסקה</h3>
+    <div id="break-modal" class="hidden fixed inset-0 bg-black/40 z-[60] flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl border border-gray-200 max-w-xs w-full p-5 shadow-2xl">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 text-center">☕ הוספת הפסקה</h3>
         <div class="flex items-center justify-center gap-3 mb-5">
           <div class="text-center">
-            <label class="block text-xs text-gray-500 mb-1">מ</label>
-            <input type="time" id="break-modal-start" value="13:00" class="bg-dark-300 border border-white/10 rounded-xl p-3 text-white text-center focus:outline-none focus:border-gold w-28" style="color-scheme:dark">
+            <label class="block text-xs text-gray-400 mb-1">מ</label>
+            <input type="time" id="break-modal-start" value="13:00" class="bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 text-center focus:outline-none focus:border-indigo w-28">
           </div>
-          <span class="text-gray-500 mt-4">–</span>
+          <span class="text-gray-400 mt-4">–</span>
           <div class="text-center">
-            <label class="block text-xs text-gray-500 mb-1">עד</label>
-            <input type="time" id="break-modal-end" value="14:00" class="bg-dark-300 border border-white/10 rounded-xl p-3 text-white text-center focus:outline-none focus:border-gold w-28" style="color-scheme:dark">
+            <label class="block text-xs text-gray-400 mb-1">עד</label>
+            <input type="time" id="break-modal-end" value="14:00" class="bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 text-center focus:outline-none focus:border-indigo w-28">
           </div>
         </div>
         <div class="flex gap-2">
-          <button onclick="closeBreakModal()" class="flex-1 bg-dark-300 border border-white/10 text-white py-2.5 rounded-xl hover:bg-dark-200 text-sm font-medium">ביטול</button>
-          <button onclick="saveBreakModal()" class="flex-1 bg-gold hover:bg-gold-hover text-white py-2.5 rounded-xl font-bold text-sm">הוסף</button>
+          <button onclick="closeBreakModal()" class="flex-1 bg-gray-100 border border-gray-200 text-gray-700 py-2.5 rounded-xl hover:bg-gray-50 text-sm font-medium">ביטול</button>
+          <button onclick="saveBreakModal()" class="flex-1 bg-indigo hover:bg-indigo-hover text-white py-2.5 rounded-xl font-bold text-sm">הוסף</button>
         </div>
       </div>
     </div>
 
     <!-- Override day modal -->
-    <div id="override-modal" class="hidden fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
-      <div class="bg-dark-100 rounded-2xl border border-white/10 max-w-sm w-full p-6 shadow-2xl">
+    <div id="override-modal" class="hidden fixed inset-0 bg-black/40 z-[60] flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl border border-gray-200 max-w-sm w-full p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-calendar-day text-gold"></i> יום מיוחד</h3>
-          <button onclick="closeOverrideModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-dark-300 text-gray-400 hover:text-white">
+          <h3 class="text-xl font-bold text-gray-900"><i class="fa-solid fa-calendar-day text-indigo"></i> יום מיוחד</h3>
+          <button onclick="closeOverrideModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:text-gray-700">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
         <div class="space-y-3">
           <div>
-            <label class="block text-sm text-gray-400 mb-2">תאריך</label>
-            <input type="date" id="override-date" class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+            <label class="block text-sm text-gray-500 mb-2">תאריך</label>
+            <input type="date" id="override-date" class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
           </div>
           <div>
-            <label class="block text-sm text-gray-400 mb-2">סוג</label>
-            <select id="override-type" onchange="onOverrideTypeChange()" class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+            <label class="block text-sm text-gray-500 mb-2">סוג</label>
+            <select id="override-type" onchange="onOverrideTypeChange()" class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
               <option value="closed">🚫 חופש (סגור כל היום)</option>
               <option value="custom">⏰ שעות מיוחדות</option>
             </select>
           </div>
           <div id="override-time-row" class="hidden">
-            <label class="block text-sm text-gray-400 mb-2">שעות</label>
+            <label class="block text-sm text-gray-500 mb-2">שעות</label>
             <div class="flex items-center gap-2">
-              <input type="time" id="override-start" value="09:00" class="flex-1 bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
-              <span class="text-gray-500">—</span>
-              <input type="time" id="override-end" value="20:00" class="flex-1 bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+              <input type="time" id="override-start" value="09:00" class="flex-1 bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
+              <span class="text-gray-400">—</span>
+              <input type="time" id="override-end" value="20:00" class="flex-1 bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
             </div>
           </div>
           <div>
-            <label class="block text-sm text-gray-400 mb-2">הערה (אופציונלי)</label>
-            <input type="text" id="override-note" placeholder="למשל: חג, אירוע..." class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold placeholder-gray-600">
+            <label class="block text-sm text-gray-500 mb-2">הערה (אופציונלי)</label>
+            <input type="text" id="override-note" placeholder="למשל: חג, אירוע..." class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo placeholder-gray-400">
           </div>
           <div class="flex gap-2 pt-2">
-            <button onclick="closeOverrideModal()" class="flex-1 bg-dark-300 border border-white/10 text-white py-3 rounded-xl hover:bg-dark-200 font-medium">ביטול</button>
-            <button onclick="saveOverride()" class="flex-1 bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold shadow-lg shadow-teal-500/20">
+            <button onclick="closeOverrideModal()" class="flex-1 bg-gray-100 border border-gray-200 text-gray-700 py-3 rounded-xl hover:bg-gray-50 font-medium">ביטול</button>
+            <button onclick="saveOverride()" class="flex-1 bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold shadow-lg shadow-indigo/20">
               <i class="fa-solid fa-check ml-1"></i> שמור
             </button>
           </div>
@@ -1232,28 +1067,29 @@
       </div>
     </div>
 
-    <div id="price-modal" class="hidden fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
-        <div class="bg-dark-100 rounded-2xl border border-white/10 max-w-sm w-full p-6 shadow-2xl">
-            <h3 class="text-xl font-bold text-white mb-4" id="price-modal-title">עריכת מחיר</h3>
+    <!-- Price modal -->
+    <div id="price-modal" class="hidden fixed inset-0 bg-black/40 z-[60] flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl border border-gray-200 max-w-sm w-full p-6 shadow-2xl">
+            <h3 class="text-xl font-bold text-gray-900 mb-4" id="price-modal-title">עריכת מחיר</h3>
             <input type="hidden" id="price-modal-id">
             <div class="space-y-3">
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">שם השירות</label>
+                    <label class="block text-sm text-gray-500 mb-2">שם השירות</label>
                     <input type="text" id="price-modal-name"
-                        class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                        class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">מחיר (₪)</label>
+                    <label class="block text-sm text-gray-500 mb-2">מחיר (₪)</label>
                     <input type="number" id="price-modal-price"
-                        class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                        class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
                 </div>
                 <div class="flex gap-2 pt-2">
                     <button onclick="closePriceModal()"
-                        class="flex-1 bg-dark-300 border border-white/10 text-white py-2 rounded-xl hover:bg-dark-200">
+                        class="flex-1 bg-gray-100 border border-gray-200 text-gray-700 py-2 rounded-xl hover:bg-gray-50">
                         ביטול
                     </button>
                     <button onclick="savePriceModal()"
-                        class="flex-1 bg-gold hover:bg-gold-hover text-white py-2 rounded-xl font-bold">
+                        class="flex-1 bg-indigo hover:bg-indigo-hover text-white py-2 rounded-xl font-bold">
                         שמור
                     </button>
                 </div>
@@ -1261,16 +1097,13 @@
         </div>
     </div>
 
-
-    <!-- Scripts (external) -->
-
-
-    <script src="js/i18n.js?v=1778438682"></script>
-    <script src="js/supabase-client.js?v=1778438682"></script>
-    <script src="js/firebase-init.js?v=1778438682"></script>
-    <script src="js/app.js?v=1778438682"></script>
-    <script src="js/booking.js?v=1778438682"></script>
-    <script src="js/dashboard.js?v=1778438682"></script>
+    <!-- Scripts -->
+    <script src="js/i18n.js?v=2"></script>
+    <script src="js/supabase-client.js?v=2"></script>
+    <script src="js/firebase-init.js?v=2"></script>
+    <script src="js/app.js?v=2"></script>
+    <script src="js/booking.js?v=2"></script>
+    <script src="js/dashboard.js?v=2"></script>
 
     <!-- PWA Install Banner -->
     <div id="pwa-install-banner">
@@ -1297,7 +1130,6 @@
       };
 
       try {
-        // Get all barbers and check each one's hours
         const { data: barbers } = await db.from('barbers').select('id,name');
         if (!barbers || barbers.length === 0) throw 'no barbers';
 
@@ -1332,25 +1164,24 @@
         }
 
         if (anyOpen) {
-          el.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 bg-green-500/15 border border-green-500/30 text-green-400';
-          el.innerHTML = '<span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> \u05e4\u05ea\u05d5\u05d7 \u05e2\u05db\u05e9\u05d9\u05d5';
+          el.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 bg-green-50 border border-green-200 text-green-600 w-fit';
+          el.innerHTML = '<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> פתוח עכשיו';
         } else {
-          el.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 bg-red-500/15 border border-red-500/30 text-red-400';
+          el.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-5 bg-red-50 border border-red-200 text-red-500 w-fit';
           let extra = '';
-          if (nextOpen) extra = ' \u00b7 \u05e0\u05e4\u05ea\u05d7 \u05d1-' + nextOpen;
-          // Check tomorrow if nothing today
+          if (nextOpen) extra = ' · נפתח ב-' + nextOpen;
           if (!nextOpen) {
             for (let d = 1; d <= 6; d++) {
               const futDow = (dow + d) % 7;
-              const dayNames = ['\u05e8\u05d0\u05e9\u05d5\u05df','\u05e9\u05e0\u05d9','\u05e9\u05dc\u05d9\u05e9\u05d9','\u05e8\u05d1\u05d9\u05e2\u05d9','\u05d7\u05de\u05d9\u05e9\u05d9','\u05e9\u05d9\u05e9\u05d9','\u05e9\u05d1\u05ea'];
+              const dayNames = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
               const defH = DEFAULT_H[futDow];
               if (defH && defH.open) {
-                extra = ' \u00b7 \u05e0\u05e4\u05ea\u05d7 \u05d9\u05d5\u05dd ' + dayNames[futDow] + ' ' + defH.start;
+                extra = ' · נפתח יום ' + dayNames[futDow] + ' ' + defH.start;
                 break;
               }
             }
           }
-          el.innerHTML = '<span class="w-2 h-2 bg-red-400 rounded-full"></span> \u05e1\u05d2\u05d5\u05e8 \u05db\u05e8\u05d2\u05e2' + extra;
+          el.innerHTML = '<span class="w-2 h-2 bg-red-400 rounded-full"></span> סגור כרגע' + extra;
         }
       } catch(e) {
         el.style.display = 'none';
@@ -1358,9 +1189,8 @@
     })();
     </script>
 
-    <!-- PWA Service Worker + Install Logic -->
+    <!-- PWA + Push Logic -->
     <script>
-      // Register Service Worker
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js").then((registration) => {
           console.log("✅ Service Worker registered");
@@ -1368,7 +1198,6 @@
         });
       }
 
-      // ── Push Notification Helpers ──
       window.PUSH_VAPID_KEY = null;
 
       async function getVapidKey() {
@@ -1378,10 +1207,7 @@
           const data = await res.json();
           window.PUSH_VAPID_KEY = data.publicKey;
           return data.publicKey;
-        } catch (e) {
-          console.warn('Could not fetch VAPID key:', e);
-          return null;
-        }
+        } catch (e) { return null; }
       }
 
       function urlBase64ToUint8Array(base64String) {
@@ -1395,47 +1221,26 @@
 
       async function subscribeToPush(phone, customerName) {
         try {
-          if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-            console.log('Push not supported');
-            return false;
-          }
-
+          if (!('serviceWorker' in navigator) || !('PushManager' in window)) return false;
           const vapidKey = await getVapidKey();
           if (!vapidKey) return false;
-
           const registration = window.__swRegistration || await navigator.serviceWorker.ready;
-
-          // Check existing subscription
           let subscription = await registration.pushManager.getSubscription();
           if (!subscription) {
             const permission = await Notification.requestPermission();
-            if (permission !== 'granted') {
-              console.log('Notification permission denied');
-              return false;
-            }
+            if (permission !== 'granted') return false;
             subscription = await registration.pushManager.subscribe({
               userVisibleOnly: true,
               applicationServerKey: urlBase64ToUint8Array(vapidKey)
             });
           }
-
-          // Send subscription to server
           await fetch('/api/push/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              subscription: subscription.toJSON(),
-              phone: phone || '',
-              customerName: customerName || ''
-            })
+            body: JSON.stringify({ subscription: subscription.toJSON(), phone: phone || '', customerName: customerName || '' })
           });
-
-          console.log('✅ Push subscription saved');
           return true;
-        } catch (e) {
-          console.warn('Push subscribe error:', e);
-          return false;
-        }
+        } catch (e) { return false; }
       }
 
       // PWA Install prompt
@@ -1443,48 +1248,26 @@
       const pwaBanner = document.getElementById("pwa-install-banner");
       const pwaInstallBtn = document.getElementById("pwa-install-btn");
       const pwaCloseBtn = document.getElementById("pwa-close-btn");
-
-      // Check if already installed or dismissed
       const pwaInstalled = window.matchMedia("(display-mode: standalone)").matches;
       const pwaDismissed = localStorage.getItem("pwa_dismissed");
 
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        // Show banner after 3 seconds if not dismissed
-        if (!pwaInstalled && !pwaDismissed) {
-          setTimeout(() => { pwaBanner.classList.add("show"); }, 3000);
-        }
+        if (!pwaInstalled && !pwaDismissed) setTimeout(() => { pwaBanner.classList.add("show"); }, 3000);
       });
 
-      if (pwaInstallBtn) {
-        pwaInstallBtn.addEventListener("click", async () => {
-          if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const result = await deferredPrompt.userChoice;
-            deferredPrompt = null;
-            pwaBanner.classList.remove("show");
-          }
-        });
-      }
+      if (pwaInstallBtn) pwaInstallBtn.addEventListener("click", async () => {
+        if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; pwaBanner.classList.remove("show"); }
+      });
+      if (pwaCloseBtn) pwaCloseBtn.addEventListener("click", () => { pwaBanner.classList.remove("show"); localStorage.setItem("pwa_dismissed", Date.now()); });
 
-      if (pwaCloseBtn) {
-        pwaCloseBtn.addEventListener("click", () => {
-          pwaBanner.classList.remove("show");
-          localStorage.setItem("pwa_dismissed", Date.now());
-        });
-      }
-
-      // Also show banner for iOS (no beforeinstallprompt)
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const isInStandalone = window.navigator.standalone;
       if (isIOS && !isInStandalone && !pwaDismissed) {
         setTimeout(() => {
           if (pwaInstallBtn) pwaInstallBtn.textContent = "הוסף למסך";
-          if (pwaInstallBtn) pwaInstallBtn.addEventListener("click", () => {
-            alert("לחץ על כפתור השיתוף (⬆️) בתחתית הדפדפן ← הוסף למסך הבית");
-            pwaBanner.classList.remove("show");
-          });
+          if (pwaInstallBtn) pwaInstallBtn.addEventListener("click", () => { alert("לחץ על כפתור השיתוף (⬆️) בתחתית הדפדפן ← הוסף למסך הבית"); pwaBanner.classList.remove("show"); });
           pwaBanner.classList.add("show");
         }, 3000);
       }
@@ -1497,16 +1280,15 @@
       const resultEl = document.getElementById('public-loyalty-result');
       const phone = (phoneInput.value || '').replace(/[^\d+]/g, '');
       if (!phone || phone.length < 9) {
-        resultEl.innerHTML = '<div class="text-red-400 text-sm text-center mt-3">הכנס מספר טלפון תקין</div>';
+        resultEl.innerHTML = '<div class="text-red-500 text-sm text-center mt-3">הכנס מספר טלפון תקין</div>';
         return;
       }
       resultEl.innerHTML = '<div class="flex justify-center py-4"><div class="spinner"></div></div>';
 
-      // Check against all barbers
       try {
         const { data: barbers } = await db.from('barbers').select('id,name');
         if (!barbers || barbers.length === 0) {
-          resultEl.innerHTML = '<div class="text-gray-500 text-sm text-center mt-3">לא נמצאו ספרים</div>';
+          resultEl.innerHTML = '<div class="text-gray-400 text-sm text-center mt-3">לא נמצאו ספרים</div>';
           return;
         }
         let found = false;
@@ -1521,83 +1303,78 @@
               const progress = Math.min((c.visits / data.visitsForReward) * 100, 100);
               const remaining = Math.max(data.visitsForReward - c.visits, 0);
               html += `
-                <div class="mt-4 bg-dark-300 rounded-xl p-4 border border-gold/20">
+                <div class="mt-4 bg-surface-alt rounded-xl p-4 border border-indigo/10">
                   <div class="flex items-center justify-between mb-3">
-                    <span class="text-white font-bold">אצל ${b.name}</span>
-                    ${c.totalRewards > 0 ? '<span class="text-green-400 text-sm font-bold">🎁 יש לך פרס!</span>' : ''}
+                    <span class="text-gray-900 font-bold">אצל ${b.name}</span>
+                    ${c.totalRewards > 0 ? '<span class="text-green-500 text-sm font-bold">🎁 יש לך פרס!</span>' : ''}
                   </div>
                   <div class="mb-2">
                     <div class="flex justify-between text-sm mb-1">
-                      <span class="text-gray-400">ביקורים</span>
-                      <span class="text-gold font-bold">${c.visits}/${data.visitsForReward}</span>
+                      <span class="text-gray-500">ביקורים</span>
+                      <span class="text-indigo font-bold">${c.visits}/${data.visitsForReward}</span>
                     </div>
-                    <div class="w-full bg-dark-100 rounded-full h-3.5">
-                      <div class="bg-gradient-to-l from-gold to-yellow-200 rounded-full h-3.5 transition-all" style="width:${progress}%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-3.5">
+                      <div class="bg-gradient-to-l from-indigo to-indigo-400 rounded-full h-3.5 transition-all" style="width:${progress}%"></div>
                     </div>
                   </div>
-                  <div class="text-sm text-center mt-2 ${remaining > 0 ? 'text-gray-400' : 'text-green-400 font-bold'}">
+                  <div class="text-sm text-center mt-2 ${remaining > 0 ? 'text-gray-500' : 'text-green-500 font-bold'}">
                     ${remaining > 0 ? `עוד ${remaining} ביקורים ל${data.rewardDescription}!` : `🎉 זכית בפרס - ${data.rewardDescription}!`}
                   </div>
-                  ${c.totalRewards > 0 ? `<div class="text-center text-xs text-green-400 mt-1">${c.totalRewards} פרסים זמינים למימוש</div>` : ''}
+                  ${c.totalRewards > 0 ? `<div class="text-center text-xs text-green-500 mt-1">${c.totalRewards} פרסים זמינים למימוש</div>` : ''}
                 </div>`;
             }
-          } catch (e) { /* skip barber */ }
+          } catch (e) {}
         }
         if (!found) {
-          resultEl.innerHTML = '<div class="text-center mt-4 py-3"><div class="text-gray-400">לא נמצאו נתונים</div><div class="text-gray-500 text-xs mt-1">ביקורים נרשמים אוטומטית לאחר כל תור</div></div>';
+          resultEl.innerHTML = '<div class="text-center mt-4 py-3"><div class="text-gray-500">לא נמצאו נתונים</div><div class="text-gray-400 text-xs mt-1">ביקורים נרשמים אוטומטית לאחר כל תור</div></div>';
         } else {
           resultEl.innerHTML = html;
         }
       } catch (e) {
-        resultEl.innerHTML = `<div class="text-red-400 text-sm text-center mt-3">שגיאה: ${e.message}</div>`;
+        resultEl.innerHTML = `<div class="text-red-500 text-sm text-center mt-3">שגיאה: ${e.message}</div>`;
       }
     }
     </script>
 
     <!-- ═══ Customer My Appointments Modal ═══ -->
-    <div id="my-appts-overlay" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center pointer-events-none opacity-0 transition-all duration-300">
-      <div class="bg-dark-100 rounded-2xl border border-white/10 shadow-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-hidden flex flex-col">
-        <!-- Header -->
-        <div class="flex items-center justify-between p-5 border-b border-white/10">
-          <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-calendar-check text-gold ml-2"></i>התורים שלי</h3>
-          <button onclick="closeMyAppointments()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+    <div id="my-appts-overlay" class="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center pointer-events-none opacity-0 transition-all duration-300">
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between p-5 border-b border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900"><i class="fa-solid fa-calendar-check text-indigo ml-2"></i>התורים שלי</h3>
+          <button onclick="closeMyAppointments()" class="text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
         </div>
-        <!-- Content -->
         <div class="flex-grow overflow-y-auto p-5" id="my-appts-content">
-          <!-- Login Step -->
           <div id="my-appts-login">
-            <p class="text-gray-400 text-sm mb-4">הכנס את הפרטים שלך כדי לראות את התורים שלך</p>
+            <p class="text-gray-500 text-sm mb-4">הכנס את הפרטים שלך כדי לראות את התורים שלך</p>
             <div class="space-y-3">
               <div>
-                <label class="block text-sm text-gray-400 mb-1">שם מלא</label>
+                <label class="block text-sm text-gray-500 mb-1">שם מלא</label>
                 <input type="text" id="my-appts-name" placeholder="הכנס שם מלא"
-                  class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                  class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
               </div>
               <div>
-                <label class="block text-sm text-gray-400 mb-1">מספר טלפון</label>
+                <label class="block text-sm text-gray-500 mb-1">מספר טלפון</label>
                 <input type="tel" id="my-appts-phone" placeholder="05X-XXXXXXX" dir="ltr"
-                  class="w-full bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold">
+                  class="w-full bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo">
               </div>
               <button onclick="myApptsLogin()" id="my-appts-login-btn"
-                class="w-full bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold transition-all">
+                class="w-full bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold transition-all">
                 <i class="fa-solid fa-arrow-left ml-1"></i> שלח קוד אימות
               </button>
             </div>
           </div>
-          <!-- OTP Step -->
           <div id="my-appts-otp" class="hidden">
-            <p class="text-gray-400 text-sm mb-4">שלחנו קוד אימות ב-SMS למספר <span id="my-appts-otp-phone" class="text-gold" dir="ltr"></span></p>
+            <p class="text-gray-500 text-sm mb-4">שלחנו קוד אימות ב-SMS למספר <span id="my-appts-otp-phone" class="text-indigo font-bold" dir="ltr"></span></p>
             <div class="mb-4">
               <input type="text" id="my-appts-otp-input" placeholder="0 0 0 0 0 0" maxlength="6"
-                class="w-full text-center text-2xl tracking-[0.3em] font-bold bg-dark-300 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-gold" dir="ltr">
+                class="w-full text-center text-2xl tracking-[0.3em] font-bold bg-surface-alt border border-gray-200 rounded-xl p-3 text-gray-900 focus:outline-none focus:border-indigo" dir="ltr">
             </div>
             <button onclick="myApptsVerifyOTP()" id="my-appts-verify-btn"
-              class="w-full bg-gold hover:bg-gold-hover text-white py-3 rounded-xl font-bold transition-all">
+              class="w-full bg-indigo hover:bg-indigo-hover text-white py-3 rounded-xl font-bold transition-all">
               אמת והצג תורים
             </button>
-            <button onclick="myApptsBackToLogin()" class="w-full text-gray-400 hover:text-white py-2 mt-2 text-sm transition-colors">חזור</button>
+            <button onclick="myApptsBackToLogin()" class="w-full text-gray-500 hover:text-gray-700 py-2 mt-2 text-sm transition-colors">חזור</button>
           </div>
-          <!-- Appointments List -->
           <div id="my-appts-list" class="hidden"></div>
         </div>
       </div>
@@ -1611,7 +1388,6 @@
       const o = document.getElementById('my-appts-overlay');
       o.classList.remove('pointer-events-none','opacity-0');
       document.body.style.overflow = 'hidden';
-      // Reset to login
       document.getElementById('my-appts-login').classList.remove('hidden');
       document.getElementById('my-appts-otp').classList.add('hidden');
       document.getElementById('my-appts-list').classList.add('hidden');
@@ -1638,11 +1414,7 @@
       btn.disabled = true; btn.textContent = 'שולח SMS...';
 
       try {
-        // Init Firebase reCAPTCHA for 2FA
-        if (typeof firebase === 'undefined' || !firebase.apps || !firebase.apps.length) {
-          throw new Error('שירות SMS לא זמין');
-        }
-        // Create invisible recaptcha
+        if (typeof firebase === 'undefined' || !firebase.apps || !firebase.apps.length) throw new Error('שירות SMS לא זמין');
         const container = document.getElementById('recaptcha-container-myappts');
         if (container) container.innerHTML = '';
         const verifier = new firebase.auth.RecaptchaVerifier('recaptcha-container-myappts', { size: 'invisible' });
@@ -1652,7 +1424,6 @@
         if (!formatted.startsWith('+')) formatted = '+972' + formatted;
 
         _myApptsConfirmation = await firebase.auth().signInWithPhoneNumber(formatted, verifier);
-
         document.getElementById('my-appts-otp-phone').textContent = formatted;
         document.getElementById('my-appts-login').classList.add('hidden');
         document.getElementById('my-appts-otp').classList.remove('hidden');
@@ -1671,8 +1442,6 @@
       try {
         if (!_myApptsConfirmation) throw new Error('נא לנסות שוב');
         await _myApptsConfirmation.confirm(code);
-
-        // OTP verified — load appointments
         const name = document.getElementById('my-appts-name').value.trim();
         const phone = document.getElementById('my-appts-phone').value.trim();
         await loadMyAppointments(name, phone);
@@ -1698,7 +1467,7 @@
         const appointments = await res.json();
 
         if (!appointments.length) {
-          listEl.innerHTML = '<div class="text-center py-8"><i class="fa-solid fa-calendar-xmark text-4xl text-gray-600 mb-3"></i><p class="text-gray-400">לא נמצאו תורים</p></div>';
+          listEl.innerHTML = '<div class="text-center py-8"><i class="fa-solid fa-calendar-xmark text-4xl text-gray-300 mb-3"></i><p class="text-gray-500">לא נמצאו תורים</p></div>';
           return;
         }
 
@@ -1712,41 +1481,41 @@
           const timeStr = appt.appointment_time.slice(0,5);
 
           const statusMap = {
-            pending: { label: 'ממתין לאישור', color: 'text-yellow-400', icon: 'fa-hourglass-half' },
-            confirmed: { label: 'מאושר', color: 'text-green-400', icon: 'fa-circle-check' },
-            completed: { label: 'הושלם', color: 'text-blue-400', icon: 'fa-circle-check' },
-            cancelled: { label: 'בוטל', color: 'text-red-400', icon: 'fa-circle-xmark' },
-            waitlist: { label: 'רשימת המתנה', color: 'text-purple-400', icon: 'fa-bell' }
+            pending: { label: 'ממתין לאישור', color: 'text-yellow-500', icon: 'fa-hourglass-half' },
+            confirmed: { label: 'מאושר', color: 'text-green-500', icon: 'fa-circle-check' },
+            completed: { label: 'הושלם', color: 'text-blue-500', icon: 'fa-circle-check' },
+            cancelled: { label: 'בוטל', color: 'text-red-500', icon: 'fa-circle-xmark' },
+            waitlist: { label: 'רשימת המתנה', color: 'text-purple-500', icon: 'fa-bell' }
           };
           const st = statusMap[appt.status] || statusMap.pending;
 
           html += `
-            <div class="bg-dark-300 rounded-xl border border-white/10 p-4">
+            <div class="bg-surface-alt rounded-xl border border-gray-200 p-4">
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
-                  <i class="fa-solid fa-scissors text-gold"></i>
-                  <span class="text-white font-medium">${appt.service_name || 'שירות'}</span>
+                  <i class="fa-solid fa-scissors text-indigo"></i>
+                  <span class="text-gray-900 font-medium">${appt.service_name || 'שירות'}</span>
                 </div>
                 <span class="${st.color} text-sm font-medium"><i class="fa-solid ${st.icon} ml-1"></i>${st.label}</span>
               </div>
-              <div class="text-sm text-gray-400 flex items-center gap-3">
+              <div class="text-sm text-gray-500 flex items-center gap-3">
                 <span><i class="fa-solid fa-calendar-day ml-1"></i>${dateStr}</span>
                 <span><i class="fa-solid fa-clock ml-1"></i>${timeStr}</span>
                 <span><i class="fa-solid fa-user ml-1"></i>${appt.barber_name || 'ספר'}</span>
               </div>
               ${canCancel ? `
                 <button onclick="cancelMyAppt('${appt.id}','${phone}','${name}')" 
-                  class="mt-3 w-full bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-400 py-2 rounded-lg text-sm font-medium transition-all">
+                  class="mt-3 w-full bg-red-50 hover:bg-red-100 border border-red-200 text-red-500 py-2 rounded-lg text-sm font-medium transition-all">
                   <i class="fa-solid fa-xmark ml-1"></i> בטל תור
                 </button>` : ''}
               ${!canCancel && appt.status !== 'cancelled' && appt.status !== 'completed' && hoursUntil <= 4 && hoursUntil > 0 ? 
-                '<p class="mt-2 text-xs text-gray-500"><i class="fa-solid fa-info-circle ml-1"></i>לא ניתן לבטל תור פחות מ-4 שעות לפני המועד</p>' : ''}
+                '<p class="mt-2 text-xs text-gray-400"><i class="fa-solid fa-info-circle ml-1"></i>לא ניתן לבטל תור פחות מ-4 שעות לפני המועד</p>' : ''}
             </div>`;
         });
         html += '</div>';
         listEl.innerHTML = html;
       } catch(e) {
-        listEl.innerHTML = `<div class="text-red-400 text-center py-4">שגיאה: ${e.message}</div>`;
+        listEl.innerHTML = `<div class="text-red-500 text-center py-4">שגיאה: ${e.message}</div>`;
       }
     }
 
@@ -1762,14 +1531,14 @@
         if (!res.ok) throw new Error(result.error || 'שגיאה');
         alert('התור בוטל בהצלחה');
         await loadMyAppointments(name, phone);
-      } catch(e) {
-        alert(e.message);
-      }
+      } catch(e) { alert(e.message); }
     }
     </script>
+
+    <!-- Footer year -->
+    <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
     <div id="recaptcha-container"></div>
     <div id="recaptcha-container-myappts"></div>
-
 </body>
-
 </html>

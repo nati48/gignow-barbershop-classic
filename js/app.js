@@ -1,5 +1,5 @@
 /* ============================================
-   APP.JS — General UI Logic
+   APP.JS — General UI Logic (Light Theme)
    ============================================ */
 
 // ── Mobile Menu Toggle ──────────────────────
@@ -9,11 +9,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 function closeMobileMenu() {
   if (!mobileMenu || !mobileMenuBtn) return;
   mobileMenu.classList.add('hidden');
-  mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars text-2xl';
-  // Remove blur from background
-  document.querySelectorAll('body > *:not(nav):not(#booking-modal-overlay):not(#dashboard-overlay)').forEach(el => {
-    el.style.filter = '';
-  });
+  mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars text-xl';
 }
 
 if (mobileMenuBtn && mobileMenu) {
@@ -21,22 +17,12 @@ if (mobileMenuBtn && mobileMenu) {
     mobileMenu.classList.toggle('hidden');
     const icon = mobileMenuBtn.querySelector('i');
     if (mobileMenu.classList.contains('hidden')) {
-      icon.className = 'fa-solid fa-bars text-2xl';
-      // Remove blur
-      document.querySelectorAll('body > *:not(nav):not(#booking-modal-overlay):not(#dashboard-overlay)').forEach(el => {
-        el.style.filter = '';
-      });
+      icon.className = 'fa-solid fa-bars text-xl';
     } else {
-      icon.className = 'fa-solid fa-xmark text-2xl';
-      // Add blur
-      document.querySelectorAll('body > *:not(nav):not(#booking-modal-overlay):not(#dashboard-overlay)').forEach(el => {
-        el.style.filter = 'blur(8px)';
-        el.style.transition = 'filter 0.3s ease';
-      });
+      icon.className = 'fa-solid fa-xmark text-xl';
     }
   });
 
-  // Close menu on ANY click inside it (links AND buttons)
   mobileMenu.querySelectorAll('a, button').forEach(el => {
     el.addEventListener('click', () => closeMobileMenu());
   });
@@ -62,3 +48,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// ── Horizontal services scroll ──────────────
+function scrollServices(direction) {
+  const container = document.getElementById('services-scroll');
+  if (!container) return;
+  const scrollAmount = 280; // card width + gap
+  container.scrollBy({ left: direction * scrollAmount * (document.dir === 'rtl' ? -1 : 1), behavior: 'smooth' });
+}
+
+// ── Footer year ─────────────────────────────
+const footerYear = document.getElementById('footer-year');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+// ── Hide floating CTA when booking modal is open ──
+const floatingCta = document.getElementById('floating-cta');
+const bookingOverlay = document.getElementById('booking-modal-overlay');
+if (floatingCta && bookingOverlay) {
+  const observer = new MutationObserver(() => {
+    if (!bookingOverlay.classList.contains('opacity-0')) {
+      floatingCta.style.display = 'none';
+    } else {
+      floatingCta.style.display = '';
+    }
+  });
+  observer.observe(bookingOverlay, { attributes: true, attributeFilter: ['class'] });
+}
