@@ -1,0 +1,12 @@
+{
+  "name": "gignow-barbershop-classic",
+  "version": "1.0.0",
+  "description": "GigNow Classic Barbershop Template",
+  "scripts": {
+    "test": "echo ok"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.7",
+    "web-push": "^3.6.0"
+  }
+}
