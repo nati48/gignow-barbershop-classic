@@ -1,5 +1,5 @@
 // Service Worker for THE CLASSIC Barbershop PWA
-const CACHE_NAME = 'classic-barber-v1';
+const CACHE_NAME = 'classic-barber-v2';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_ASSETS = [

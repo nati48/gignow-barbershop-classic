@@ -7,7 +7,7 @@
     <title>THE CLASSIC | הברברשופ של השכונה</title>
 
     <!-- PWA / Mobile App Meta Tags -->
-    <meta name="theme-color" content="#2C1810">
+    <meta name="theme-color" content="#1E293B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="The Classic">
@@ -50,10 +50,10 @@
                         serif: ['Playfair Display', 'Georgia', 'serif'],
                     },
                     colors: {
-                        cream: { DEFAULT: '#F5F0E8', light: '#FAF8F3', dark: '#EDE5D8' },
-                        brown: { DEFAULT: '#2C1810', light: '#4A3228', medium: '#3D261C' },
-                        burgundy: { DEFAULT: '#8B2252', light: '#A63366', dark: '#6E1A41' },
-                        gold: { DEFAULT: '#B8860B', light: '#D4A017', dark: '#96700A', hover: '#96700A' },
+                        cream: { DEFAULT: '#FFFFFF', light: '#FAF8F3', dark: '#EDE5D8' },
+                        brown: { DEFAULT: '#1E293B', light: '#4A3228', medium: '#3D261C' },
+                        burgundy: { DEFAULT: '#2563EB', light: '#A63366', dark: '#6E1A41' },
+                        gold: { DEFAULT: '#0EA5E9', light: '#D4A017', dark: '#96700A', hover: '#96700A' },
                     }
                 }
             }
@@ -409,12 +409,12 @@
     <!-- ═══════════════════════════════════════════
          BOOKING MODAL
          ═══════════════════════════════════════════ -->
-    <div id="booking-modal-overlay" class="pointer-events-none opacity-0" style="transition: opacity 0.3s;">
+    <div id="booking-modal-overlay" class="pointer-events-none opacity-0" onclick="if(event.target===this)closeBookingModal()" style="transition: opacity 0.3s;">
         <div id="booking-modal-content">
             <!-- Header -->
             <div class="booking-header">
                 <h3><i class="fa-solid fa-calendar-check ml-2" style="color: var(--gold-light)"></i> הזמנת תור</h3>
-                <button class="booking-close" onclick="closeBookingModal()">&times;</button>
+                <button class="booking-close" onclick="closeBookingModal()" style="width:40px;height:40px;font-size:28px;display:flex;align-items:center;justify-content:center">&times;</button>
             </div>
 
             <!-- Progress -->
