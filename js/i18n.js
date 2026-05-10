@@ -731,7 +731,7 @@
       wrap.style.width = '100%';
       wrap.style.justifyContent = 'center';
       wrap.style.padding = '8px 0 12px';
-      wrap.style.borderBottom = '1px solid rgba(44,24,16,0.05)';
+      wrap.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
       wrap.style.marginBottom = '4px';
     }
 
@@ -740,23 +740,23 @@
     trigger.type = 'button';
     trigger.className = 'lang-trigger';
     trigger.innerHTML = FLAGS[curLang] + ' <span style="font-size:12px;font-weight:600">' + SHORT[curLang] + '</span> <i class="fa-solid fa-chevron-down" style="font-size:8px;opacity:0.5;margin-right:2px"></i>';
-    trigger.style.cssText = 'display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1px solid rgba(44,24,16,0.1);background:rgba(44,24,16,0.03);color:rgba(44,24,16,0.6);cursor:pointer;font-size:16px;font-family:inherit;transition:all 0.2s;';
+    trigger.style.cssText = 'display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;font-family:inherit;transition:all 0.2s;';
 
     // Dropdown menu
     var menu = document.createElement('div');
     menu.className = 'lang-menu';
-    menu.style.cssText = 'position:absolute;top:calc(100% + 6px);right:0;background:var(--cream-light, #FAF8F3);border:1px solid rgba(44,24,16,0.1);border-radius:10px;padding:4px;min-width:140px;box-shadow:0 10px 30px rgba(44,24,16,0.2);display:none;z-index:100;';
+    menu.style.cssText = 'position:absolute;top:calc(100% + 6px);right:0;background:#1A1A1A;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:4px;min-width:140px;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:none;z-index:100;';
 
     ['he', 'ru', 'en'].forEach(function(code) {
       var opt = document.createElement('button');
       opt.type = 'button';
       opt.innerHTML = '<span style="font-size:18px">' + FLAGS[code] + '</span> <span>' + LABELS[code] + '</span>';
-      opt.style.cssText = 'display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:7px;color:rgba(44,24,16,0.6);cursor:pointer;font-size:13px;border:none;background:none;width:100%;font-family:inherit;text-align:right;transition:all 0.15s;';
+      opt.style.cssText = 'display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:7px;color:rgba(255,255,255,0.7);cursor:pointer;font-size:13px;border:none;background:none;width:100%;font-family:inherit;text-align:right;transition:all 0.15s;';
       if (code === curLang) {
-        opt.style.color = '#8B2252';
-        opt.style.background = 'rgba(139,34,82,0.08)';
+        opt.style.color = '#C5A059';
+        opt.style.background = 'rgba(197,160,89,0.08)';
       }
-      opt.addEventListener('mouseenter', function() { if (code !== getCurrentLang()) opt.style.background = 'rgba(139,34,82,0.1)'; });
+      opt.addEventListener('mouseenter', function() { if (code !== getCurrentLang()) opt.style.background = 'rgba(197,160,89,0.1)'; });
       opt.addEventListener('mouseleave', function() { if (code !== getCurrentLang()) opt.style.background = 'none'; });
       opt.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -768,8 +768,8 @@
         // Update active state
         menu.querySelectorAll('button').forEach(function(b, i) {
           var c = ['he','ru','en'][i];
-          b.style.color = c === code ? '#8B2252' : 'rgba(44,24,16,0.6)';
-          b.style.background = c === code ? 'rgba(139,34,82,0.08)' : 'none';
+          b.style.color = c === code ? '#C5A059' : 'rgba(255,255,255,0.7)';
+          b.style.background = c === code ? 'rgba(197,160,89,0.08)' : 'none';
         });
         // Update all other switchers on the page
         document.querySelectorAll('.lang-trigger').forEach(function(t) {

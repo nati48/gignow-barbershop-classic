@@ -1616,8 +1616,8 @@ async function loadReports() {
         datasets: [{
           label: 'הכנסה (₪)',
           data: revenueData,
-          backgroundColor: 'rgba(139, 34, 82, 0.7)',
-          borderColor: '#8B2252',
+          backgroundColor: 'rgba(197, 160, 89, 0.7)',
+          borderColor: '#C5A059',
           borderWidth: 1,
           borderRadius: 6
         }]
@@ -1626,8 +1626,8 @@ async function loadReports() {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: '#8B7355' }, grid: { display: false } },
-          y: { ticks: { color: '#8B7355', callback: v => '₪' + v }, grid: { color: 'rgba(44,24,16,0.08)' } }
+          x: { ticks: { color: '#9CA3AF' }, grid: { display: false } },
+          y: { ticks: { color: '#9CA3AF', callback: v => '₪' + v }, grid: { color: 'rgba(255,255,255,0.05)' } }
         }
       }
     });
@@ -1649,8 +1649,8 @@ async function loadReports() {
         datasets: [{
           label: 'תורים',
           data: hourData,
-          backgroundColor: 'rgba(139, 34, 82, 0.5)',
-          borderColor: '#8B2252',
+          backgroundColor: 'rgba(197, 160, 89, 0.5)',
+          borderColor: '#C5A059',
           borderWidth: 1,
           borderRadius: 4
         }]
@@ -1660,8 +1660,8 @@ async function loadReports() {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: '#8B7355' }, grid: { color: 'rgba(44,24,16,0.08)' } },
-          y: { ticks: { color: '#8B7355' }, grid: { display: false } }
+          x: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: '#9CA3AF' }, grid: { display: false } }
         }
       }
     });
@@ -1681,8 +1681,8 @@ async function loadReports() {
         datasets: [{
           label: 'תורים',
           data: dayCounts,
-          backgroundColor: dayCounts.map((_, i) => i === 6 ? 'rgba(239,68,68,0.3)' : 'rgba(139, 34, 82, 0.6)'),
-          borderColor: dayCounts.map((_, i) => i === 6 ? '#EF4444' : '#8B2252'),
+          backgroundColor: dayCounts.map((_, i) => i === 6 ? 'rgba(239,68,68,0.3)' : 'rgba(197, 160, 89, 0.6)'),
+          borderColor: dayCounts.map((_, i) => i === 6 ? '#EF4444' : '#C5A059'),
           borderWidth: 1,
           borderRadius: 6
         }]
@@ -1691,8 +1691,8 @@ async function loadReports() {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: '#8B7355' }, grid: { display: false } },
-          y: { ticks: { color: '#8B7355' }, grid: { color: 'rgba(44,24,16,0.08)' } }
+          x: { ticks: { color: '#9CA3AF' }, grid: { display: false } },
+          y: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(255,255,255,0.05)' } }
         }
       }
     });

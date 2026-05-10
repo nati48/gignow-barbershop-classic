@@ -37,22 +37,22 @@ async function loadBarberOptions() {
       const price = b.base_price || 60;
       const isRon = b.name === '\u05e8\u05d5\u05df \u05e2\u05de\u05e8';
       const label = document.createElement('label');
-      label.className = 'flex items-center justify-between p-4 rounded-xl border border-brown/10 bg-white cursor-pointer hover:border-burgundy transition-all focus-within:border-burgundy focus-within:bg-burgundy/5';
+      label.className = 'flex items-center justify-between p-4 rounded-xl border border-white/10 bg-dark-300 cursor-pointer hover:border-gold/50 transition-all focus-within:border-gold focus-within:bg-gold/5';
       label.innerHTML = `
         <div class="flex items-center gap-4">
           <input type="radio" name="barber" value="${safeName}" data-base-price="${price}"
-            class="w-4 h-4 text-burgundy bg-cream-light border-brown/20 focus:ring-burgundy focus:ring-offset-cream">
-          <div class="w-10 h-10 bg-cream-light rounded-full flex items-center justify-center text-brown/50 text-lg">
-            <i class="fa-solid fa-user ${isRon ? 'text-burgundy' : ''}"></i>
+            class="w-4 h-4 text-gold bg-dark-100 border-gray-600 focus:ring-gold focus:ring-offset-dark-300">
+          <div class="w-10 h-10 bg-dark-100 rounded-full flex items-center justify-center text-gray-400 text-lg">
+            <i class="fa-solid fa-user ${isRon ? 'text-gold' : ''}"></i>
           </div>
-          <span class="text-brown font-medium ${isRon ? 'font-bold' : ''}">${safeName}</span>
+          <span class="text-white font-medium ${isRon ? 'font-bold' : ''}">${safeName}</span>
         </div>
-        <span class="text-brown/50 text-sm">\u05d4\u05d7\u05dc \u05de-\u20aa${price}</span>
+        <span class="text-gray-400 text-sm">\u05d4\u05d7\u05dc \u05de-\u20aa${price}</span>
       `;
       container.appendChild(label);
     });
   } catch(e) {
-    container.innerHTML = '<p class="text-red-600 text-center py-4">\u05e9\u05d2\u05d9\u05d0\u05d4 \u05d1\u05d8\u05e2\u05d9\u05e0\u05ea \u05e1\u05e4\u05e8\u05d9\u05dd</p>';
+    container.innerHTML = '<p class="text-red-400 text-center py-4">\u05e9\u05d2\u05d9\u05d0\u05d4 \u05d1\u05d8\u05e2\u05d9\u05e0\u05ea \u05e1\u05e4\u05e8\u05d9\u05dd</p>';
   }
 }
 
@@ -311,19 +311,19 @@ async function populateServices(barberName, basePrice) {
       const safeName = _esc(service.name);
       const priceText = service.name === 'צבע / גוונים לגבר' ? `₪${service.price}+` : `₪${service.price}`;
       const label = document.createElement('label');
-      label.className = 'flex items-center justify-between p-4 rounded-xl border border-brown/10 bg-white cursor-pointer hover:border-burgundy transition-all focus-within:border-burgundy focus-within:bg-burgundy/5';
+      label.className = 'flex items-center justify-between p-4 rounded-xl border border-white/10 bg-dark-300 cursor-pointer hover:border-gold/50 transition-all focus-within:border-gold focus-within:bg-gold/5';
       label.innerHTML = `
         <div class="flex items-center gap-4">
           <input type="radio" name="service" value="${safeName}" data-service-id="${_esc(service.id)}" data-price="${service.price}"
-            class="w-4 h-4 text-burgundy bg-cream-light border-brown/20 focus:ring-burgundy focus:ring-offset-cream">
-          <span class="text-brown font-medium">${safeName}</span>
+            class="w-4 h-4 text-gold bg-dark-100 border-gray-600 focus:ring-gold focus:ring-offset-dark-300">
+          <span class="text-white font-medium">${safeName}</span>
         </div>
-        <span class="text-brown/50 text-sm">${priceText}</span>
+        <span class="text-gray-400 text-sm">${priceText}</span>
       `;
       container.appendChild(label);
     });
   } catch (err) {
-    container.innerHTML = `<p class="text-red-600 text-center py-4">שגיאה בטעינת שירותים: ${err.message}</p>`;
+    container.innerHTML = `<p class="text-red-400 text-center py-4">שגיאה בטעינת שירותים: ${err.message}</p>`;
   }
 }
 
@@ -504,7 +504,7 @@ async function generateTimeSlots() {
   }
 
   if (!dayCfg || !dayCfg.open) {
-    container.innerHTML = '<div class="col-span-3 text-center text-red-600 py-4">סגור ביום זה</div>';
+    container.innerHTML = '<div class="col-span-3 text-center text-red-400 py-4">סגור ביום זה</div>';
     return;
   }
 
@@ -574,10 +574,10 @@ async function generateTimeSlots() {
     const waitlistDiv = document.createElement('div');
     waitlistDiv.className = 'col-span-3 text-center py-4';
     waitlistDiv.innerHTML = `
-      <div class="bg-white border border-gold/20 rounded-xl p-4">
-        <p class="text-burgundy font-semibold mb-1"><i class="fa-solid fa-bell"></i> כל השעות תפוסות</p>
-        <p class="text-brown/50 text-sm mb-3">השאר פרטים ונודיע לך אם משהו יתפנה</p>
-        <button type="button" onclick="joinWaitlist()" class="bg-burgundy hover:bg-burgundy-hover text-white px-6 py-2 rounded-xl font-bold text-sm transition-all">
+      <div class="bg-dark-300 border border-gold/20 rounded-xl p-4">
+        <p class="text-gold font-semibold mb-1"><i class="fa-solid fa-bell"></i> כל השעות תפוסות</p>
+        <p class="text-gray-400 text-sm mb-3">השאר פרטים ונודיע לך אם משהו יתפנה</p>
+        <button type="button" onclick="joinWaitlist()" class="bg-gold hover:bg-gold-hover text-white px-6 py-2 rounded-xl font-bold text-sm transition-all">
           <i class="fa-solid fa-user-plus ml-1"></i> הצטרף לרשימת המתנה
         </button>
       </div>
